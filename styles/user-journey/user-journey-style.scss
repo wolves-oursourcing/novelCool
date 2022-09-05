@@ -1,0 +1,136 @@
+.user-journey-wrapper {
+  .first-journey-section {
+    padding: 130px 90px 90px 90px;
+    color: #0e0707;
+    .heading {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .title {
+      font-size: 54px;
+      line-height: 67px;
+      font-family: 'DM Serif Display', serif;
+    }
+  }
+  .block-content {
+    color: #fff;
+    .title {
+      font-size: 26px;
+      font-family: 'DM Serif Display', serif;
+      margin-bottom: 20px;
+    }
+    .description {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      margin-left: 24px;
+    }
+    .tab-link {
+      padding: 20px 0 13px 0;
+      border-bottom: 1px solid #fff;
+      color: #fff;
+      display: flex;
+      .link-name {
+        font-size: 16px;
+        font-family: 'DM Serif Display', serif;
+        transition: flex 0.5s;
+      }
+      .icon-arrow {
+        margin-left: 5%;
+      }
+    }
+    .tab-link:hover,
+    .active-tab {
+      .link-name {
+        flex: auto;
+        transition: flex 0.5s;
+      }
+    }
+  }
+  .second-journey-section {
+    padding: 34px 110px;
+    background-color: #00517b;
+  }
+  .third-journey-section {
+    padding: 140px 110px;
+    .block-content {
+      color: #0e0707;
+      .tab-link {
+        border-bottom: 1px solid #0e0707;
+        color: #0e0707;
+      }
+    }
+  }
+  .fourth-journey-section {
+    padding: 34px 110px;
+    background-color: #1f95a8;
+  }
+  .slick-track {
+    display: flex;
+  }
+  .slick-track .slick-slide {
+    display: flex;
+    height: auto;
+    align-items: center; //optional
+    justify-content: center; //optional
+  }
+  .slick-track .slick-slide > div {
+    height: 100%;
+  }
+}
+@media screen and(max-width:1024px) {
+  .user-journey-wrapper {
+    .first-journey-section {
+      padding: 130px 25px 90px 25px;
+    }
+    .second-journey-section,
+    .fourth-journey-section {
+      padding: 34px 25px;
+    }
+    .third-journey-section {
+      padding: 140px 25px;
+    }
+  }
+}
+@media screen and(max-width:768px) {
+  .user-journey-wrapper {
+    .first-journey-section {
+      padding: 90px 25px 25px 25px;
+      .title {
+        font-size: 32px;
+      }
+    }
+    .col-wrapper {
+      display: flex;
+      width: 100%;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      justify-content: center;
+    }
+    .block-content .tab-link {
+      border-bottom: none;
+      padding: 0;
+      margin-right: 25px;
+      margin-bottom: 20px;
+    }
+    .block-content .icon-arrow {
+      display: none;
+    }
+    .block-content .active-tab {
+      color: #ffd100;
+    }
+    .image-wrapper {
+      justify-content: center;
+    }
+    .third-journey-section {
+      padding: 34px 25px;
+      .block-content .tab-link {
+        border: none;
+      }
+      .block-content .active-tab {
+        color: #ffd100;
+      }
+    }
+  }
+}

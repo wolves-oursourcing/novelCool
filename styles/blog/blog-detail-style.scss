@@ -1,0 +1,211 @@
+.blog-detail {
+  padding-top: 110px;
+  .blog-section {
+    display: flex;
+    width: 100%;
+    padding: 0 90px;
+  }
+  .wrap-banner {
+    width: 100%;
+    height: 500px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .blog-content {
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .first-blog-section {
+    padding: 87px 90px 0px;
+    .block-top {
+      .heading {
+        font-size: 16px;
+        font-weight: 500;
+        color: #0e0707;
+        margin-bottom: 12px;
+      }
+      .title {
+        font-size: 48px;
+        line-height: 67px;
+        font-family: 'DM Serif Display', serif;
+        margin-bottom: 50px;
+      }
+      .sub-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #0e0707;
+        margin-bottom: 113px;
+      }
+    }
+    .image-wrapper {
+      position: relative;
+      &::before {
+        background-color: rgba(14, 7, 7, 0.2);
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+      }
+      .box {
+        position: absolute;
+        padding: 79px 48px 100px 56px;
+        background-color: #00517b;
+        bottom: 600px;
+        right: 90px;
+        z-index: 2;
+        width: 38%;
+        min-height: 299px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        .box-title {
+          font-size: 24px;
+          font-weight: 500;
+          margin-bottom: 25px;
+          font-family: 'DM Serif Display', serif;
+        }
+        .box-description {
+          font-size: 18px;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+  .second-blog-section {
+    padding: 111px 90px;
+    overflow: hidden;
+    .title {
+      font-size: 54px;
+      line-height: 67px;
+      font-family: 'DM Serif Display', serif;
+      margin-bottom: 50px;
+    }
+    .sub-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #0e0707;
+    }
+  }
+  .third-blog-section {
+    background: url('/img/blog_detail.png') no-repeat;
+    min-height: 800px;
+    background-size: cover;
+    padding: 66px 59px;
+    .content-wrapper {
+      padding: 84px;
+      color: #fff;
+      background-color: #00b4d1;
+      .title {
+        font-size: 26px;
+        font-weight: 400;
+        font-family: 'DM Serif Display', serif;
+        margin-bottom: 30px;
+      }
+      .description {
+        font-size: 21px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+@media screen and(max-width:1024px) {
+  .blog-detail {
+    .wrap-banner {
+      height: 400px;
+    }
+    .first-blog-section {
+      padding-top: 60px;
+      .block-top {
+        .title {
+          font-size: 40px;
+        }
+      }
+      .image-wrapper {
+        .box {
+          padding: 24px;
+          right: 25px;
+          bottom: 350px;
+        }
+      }
+    }
+    .second-blog-section {
+      padding: 90px 25px;
+      .sub-title {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+@media screen and(max-width:768px) {
+  .blog-detail {
+    padding-top: 50px;
+    .first-blog-section {
+      padding: 32px 25px 100px 25px;
+      .block-top {
+        .title {
+          font-size: 32px;
+          line-height: 40px;
+          margin-bottom: 24px;
+        }
+        .sub-title {
+          margin-bottom: 24px;
+        }
+      }
+      .image-wrapper {
+        .box {
+          left: 15%;
+          top: 70%;
+          width: 70%;
+          display: flex;
+          min-height: 200px;
+          flex-direction: column;
+          justify-content: center;
+          .box-title {
+            font-size: 14px;
+          }
+          .box-description {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    .second-blog-section {
+      padding-top: 60px;
+      .title {
+        font-size: 32px;
+        line-height: 40px;
+        margin-bottom: 24px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .blog-detail {
+    .wrap-banner {
+      height: 300px;
+    }
+    .first-blog-section {
+      .image-wrapper {
+        .box {
+          display: block;
+          height: fit-content;
+          width: 90%;
+          left: 5%;
+        }
+      }
+    }
+    .third-blog-section {
+      .content-wrapper {
+        padding: 24px;
+      }
+    }
+  }
+}

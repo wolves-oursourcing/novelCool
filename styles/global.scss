@@ -1,0 +1,129 @@
+@import './header.scss';
+@import './sidebar.scss';
+@import './home/home.scss';
+@import './footer.scss';
+@import './products/products-style.scss';
+@import './services/services-style.scss';
+@import './about-us/about-us-style.scss';
+@import './success-stories/success-stories-style.scss';
+@import './get-in-touch-style.scss';
+@import './blog/blog-list-style.scss';
+@import './blog/blog-detail-style.scss';
+@import './success-stories/modal/view-detail-style.scss';
+@import './success-stories/modal/view-flow-style.scss';
+@import './user-journey/user-journey-style.scss';
+@import './privacy-policy/index.scss';
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  // font-family: 'DM Serif Display', serif;
+  // font-family: 'Poppins', sans-serif;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+.container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+.wrapper-container {
+  max-width: 1440px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.d-flex {
+  display: flex !important;
+}
+.align-items-center {
+  align-items: center;
+}
+.align-items-end {
+  align-items: flex-end;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.justify-content-end {
+  justify-content: flex-end;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+.w-100 {
+  width: 100%;
+}
+.w-50 {
+  width: 50%;
+}
+.h-100 {
+  height: 100%;
+}
+.flex-column {
+  flex-direction: column;
+}
+.text-center {
+  text-align: center;
+}
+.mt-auto {
+  margin-top: auto;
+}
+.ml-3 {
+  margin-left: 18px;
+}
+
+// DOT in Carousel
+.ant-carousel {
+  width: 100%;
+  .custom-dot {
+    bottom: -8px !important;
+    margin: auto !important;
+    li {
+      button {
+        background-color: #99adff !important;
+        &::before {
+          display: none;
+        }
+      }
+      &.slick-active {
+        button {
+          background-color: #4d70ff !important;
+        }
+      }
+    }
+  }
+}
+
+// LOADING
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+}
+
+// PAGINATION
+.pagination {
+  text-align: center;
+  margin-top: 10px !important;
+}
+
+.wrapper-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

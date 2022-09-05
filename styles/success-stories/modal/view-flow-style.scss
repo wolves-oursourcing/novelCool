@@ -1,0 +1,26 @@
+.view-flow-modal {
+  .ant-modal-body {
+    padding: 50px 60px;
+  }
+  .view-wrapper {
+    .view-title {
+      font-size: 36px;
+      font-family: 'DM Serif Display', serif;
+      color: #0e0707;
+      margin-bottom: 24px;
+    }
+    .view-image {
+      padding: 7px 20px;
+    }
+  }
+  @media screen and (max-width: 786px) {
+    .ant-modal-body {
+      padding: 24px;
+    }
+    .view-wrapper {
+      .view-title {
+        font-size: 24px;
+      }
+    }
+  }
+}

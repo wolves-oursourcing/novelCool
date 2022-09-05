@@ -1,0 +1,115 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 90px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: 999;
+  width: 100%;
+  max-width: 1440px;
+  transition: 0.5s all;
+
+  .header-link {
+    font-size: 16px;
+    color: #000;
+    font-weight: 500;
+    margin: 0 20px;
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 0;
+      height: 2px;
+      background-color: #000;
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      -moz-transition: all 0.5s;
+      transition: all 0.5s;
+    }
+
+    &.active:before,
+    &:hover:before {
+      width: 100%;
+    }
+  }
+  .list-menu-right {
+    display: flex;
+    align-items: center;
+
+    .btn-get-app {
+      background-color: transparent;
+      background: linear-gradient(to right, transparent 50%, #FFD100 50%);
+      background-size: 200% 100%;
+      background-position:left bottom;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0e0707;
+      border-color: #0e0707;
+      background-color: transparent;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      &:hover{
+        background-position: right bottom !important;
+        border-color:#FFD100
+      }
+    }
+    .search {
+      font-size: 17px;
+      color: #0e0707;
+      margin-left: 24px;
+    }
+  }
+}
+.dark-mode {
+  .header-link {
+    color: #fff;
+    &:before {
+      background-color: #fff;
+    }
+  }
+  .list-menu-right {
+    .btn-get-app {
+      color: #fff;
+      border-color: #fff;
+    }
+    .search {
+      color: #fff;
+    }
+  }
+}
+
+.scroll-sticky {
+  background-color: #fff;
+  transition: 0.5s all;
+  .header-link {
+    color: #000;
+    &:before {
+      background-color: #000;
+    }
+  }
+  .list-menu-right {
+    .btn-get-app {
+      color: #000;
+      border-color: #000;
+    }
+    .search {
+      color: #000;
+    }
+  }
+}
+@media screen and (max-width:1024px){
+  .header{
+    padding: 28px 15px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header {
+    display: none;
+  }
+}

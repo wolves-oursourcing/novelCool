@@ -1,0 +1,44 @@
+.view-detail-modal {
+  .ant-modal-body {
+    padding: 50px 144px 50px 60px;
+  }
+  .modal-wrapper {
+    padding: 24px 40px;
+    background-color: #00517b;
+    color: #fff;
+    font-size: 19px;
+    font-family: 'DM Serif Display', serif;
+    display: flex;
+    align-items: center;
+    .text {
+      flex: 1;
+    }
+    .image {
+      margin-right: -170px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .ant-modal-body {
+      padding: 40px;
+    }
+    .modal-wrapper {
+      padding: 24px;
+      .image {
+        margin-right: -130px;
+      }
+    }
+  }
+  @media screen and (max-width: 576px) {
+    .ant-modal-body {
+      padding: 20px;
+    }
+    .modal-wrapper {
+      font-size: 14px;
+      padding: 24px;
+      .image {
+        display: none;
+        margin-right: -130px;
+      }
+    }
+  }
+}

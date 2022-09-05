@@ -1,0 +1,101 @@
+.first-section-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0 90px;
+  padding-top: 130px;
+
+  .block-left {
+    font-size: 50px;
+    line-height: 62px;
+    color: #0e0707;
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+
+    .content {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 29px;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #0e0707;
+      margin-bottom: 30px;
+      margin-top: 24px;
+    }
+    .btn-get-started {
+      background-color: transparent;
+      background: linear-gradient(to right, transparent 50%, #ffd100 50%);
+      background-size: 200% 100%;
+      background-position: left bottom;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0e0707;
+      border-color: #0e0707;
+      background-color: transparent;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      &:hover {
+        background-position: right bottom !important;
+        border-color: #ffd100;
+      }
+    }
+  }
+  .social-group {
+    position: relative;
+    border-right: 2px solid #0e0707;
+    margin-left: auto;
+    .group {
+      position: absolute;
+      left: -9px;
+      background-color: #fff;
+      top: 86px;
+
+      .icon-social {
+        font-size: 20px;
+        color: #0e0707;
+        margin: 12px 0;
+        display: inline-block;
+      }
+    }
+  }
+}
+.first-section-about {
+  padding: 130px 0;
+  text-align: center;
+  .heading {
+    font-size: 14px;
+    letter-spacing: 5px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .title {
+    font-size: 64px;
+    line-height: 80px;
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .first-section-wrapper {
+    padding: 90px 15px 0 15px;
+  }
+}
+@media screen and(max-width:768px) {
+  .first-section-wrapper {
+    .block-left {
+      font-size: 32px;
+      line-height: 48px;
+      margin-bottom: 16px;
+    }
+    .block-right-wrapper > div {
+      justify-content: flex-start !important;
+    }
+  }
+  .first-section-about {
+    padding: 60px 0;
+    .title {
+      font-size: 32px;
+      line-height: 40px;
+    }
+  }
+}
