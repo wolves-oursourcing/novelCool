@@ -5,8 +5,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { LayoutProvider } from '../layout/DefaultLayout';
 
-function SiristaApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return <LayoutProvider>{<Component {...pageProps} />}</LayoutProvider>;
 }
 
-export default SiristaApp;
+export default App;

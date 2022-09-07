@@ -2,7 +2,6 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { Carousel, Col, Pagination, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import GetInTouchComponent from '../get-in-touch';
 import { useRouter } from 'next/router';
 import { Blog } from '../../services/blog.service';
 import { PER_PAGE } from '../../api/configs';
@@ -80,7 +79,6 @@ const BlogPageWrapper = (props: IPropsWrapperBlog) => {
           />
         )}
       </div>
-      <GetInTouchComponent />
     </>
   );
 };

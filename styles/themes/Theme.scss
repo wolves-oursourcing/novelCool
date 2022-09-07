@@ -1,0 +1,33 @@
+// THEME
+:root {
+    /* Dark mode variables go here */
+    --color-primary: #ff7b0a;
+    --color-primary-contrast: #fff;
+    --bg-color: #f5f5f5;
+    --bg-color1: #ffffff;
+    --bg-color2: #f3f3f3;
+    --bg-color-header: #323232;
+    --text-color-header: #fff;
+    --text-color: #2a2e2e;
+    --color-boxShadow: rgb(0 0 0 / 40%);
+    --fade: rgba(255,255,255,.6);
+    --color-gray: #cecac8;
+    --color-red: #ffe6e6;
+    --color-red1: #ff8989;
+    --color-green:#ecf9ec;
+    --color-green1:#009933;
+    --color-dark: #323232;
+    --bg-color-dark-input: #01040c;
+    --color-dark-input: #fff;
+}
+[data-theme='dark'] {
+    /* Light mode variables go here */
+    --color-primary: #ff7b0a;
+    --color-primary-contrast: #fff;
+    --bg-color: #121212;
+    --bg-color1: #1b1b1b;
+    --bg-color2: #202020;
+    --text-color: #acacac;
+    --color-boxShadow: rgb(255 255 255 / 40%);
+    --fade: rgba(27,27,27,.5);
+}

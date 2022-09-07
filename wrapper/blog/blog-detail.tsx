@@ -1,6 +1,5 @@
 import { Col, Row } from 'antd';
 import React from 'react';
-import GetInTouchComponent from '../get-in-touch';
 import { Blog } from '../../services/blog.service';
 import Loading from '../../layout/Loading';
 
@@ -84,8 +83,6 @@ const BlogDetailWrapper = (props: IPropsBlogDetailWrapper) => {
         </Row>
       </section> */}
       <Loading show={isLoading} />
-
-      <GetInTouchComponent />
     </div>
   );
 };

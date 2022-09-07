@@ -1,57 +1,93 @@
 import React, { FC, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from 'antd';
+import { Button, Dropdown, Input, Menu } from 'antd';
 import { useRouter } from 'next/router';
-import {
-  URL_ABOUT_US,
-  URL_BLOG,
-  URL_CONTACT,
-  URL_PRODUCTS,
-  URL_ROOT,
-  URL_SERVICES,
-  URL_SUCCESS_STORIES,
-  URL_USER_JOURNEY
-} from '../utilities/URL';
-import { SearchOutlined } from '@ant-design/icons';
+import { URL_APP, URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
+import { CloudUploadOutlined, UserOutlined } from '@ant-design/icons';
+
+interface ILanguage {
+  code: string;
+  name: string;
+  flag: string;
+}
 
 const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   const router = useRouter();
+  const languages: ILanguage[] = [
+    {
+      code: 'uk',
+      name: 'England',
+      flag: ''
+    },
+    {
+      code: 'fr',
+      name: 'France',
+      flag: ''
+    }
+  ];
 
+  const [languageSelected, setLanguageSelected] = useState<ILanguage>(languages[0]);
+
+  const onChange = (e: any) => {
+    console.log(e);
+  };
+
+  // RENDER
+  const menu = () => {
+    return (
+      <Menu
+        items={languages.map((language, index) => {
+          return {
+            key: index + 1,
+            label: <div onClick={() => setLanguageSelected(language)}>{language?.name}</div>
+          };
+        })}
+      />
+    );
+  };
   return (
-    <div className={`header  ${isScroll && 'scroll-sticky'}`}>
+    <div className={`header container ${isScroll && 'scroll-sticky'}`}>
       <a className="logo" href={URL_ROOT}>
         <Image src="/img/sirrista-logo.png" alt="logo" width={86} height={50} />
       </a>
       <div className="list-menu">
-        <a href={URL_ROOT} className={`header-link ${router.pathname === URL_ROOT ? 'active' : ''}`}>
-          Home
-        </a>
-        <Link href={URL_PRODUCTS}>
-          <a className={`header-link ${router.pathname === URL_PRODUCTS ? 'active' : ''}`}>Products</a>
+        <Link href={URL_ROOT}>
+          <a className={`header-link ${router.pathname === URL_ROOT ? 'active' : ''}`}>Latest</a>
         </Link>
-        <Link href={URL_SERVICES}>
-          <a className={`header-link ${router.pathname === URL_SERVICES ? 'active' : ''}`}>Services</a>
+        <Link href={URL_CATEGORY}>
+          <a className={`header-link ${router.pathname === URL_CATEGORY ? 'active' : ''}`}>Category</a>
         </Link>
-        <Link href={URL_ABOUT_US}>
-          <a className={`header-link ${router.pathname === URL_ABOUT_US ? 'active' : ''}`}>About Us</a>
+        <Link href={URL_NEW}>
+          <a className={`header-link ${router.pathname === URL_NEW ? 'active' : ''}`}>New</a>
         </Link>
-        <Link href={URL_SUCCESS_STORIES}>
-          <a className={`header-link ${router.pathname === URL_SUCCESS_STORIES ? 'active' : ''}`}>Success Stories</a>
+        <Link href={URL_POPULAR}>
+          <a className={`header-link ${router.pathname === URL_POPULAR ? 'active' : ''}`}>Popular</a>
         </Link>
-        <Link href={URL_BLOG}>
-          <a className={`header-link ${router.pathname === URL_BLOG ? 'active' : ''}`}>Blog</a>
+        <Link href={URL_SURPRISE}>
+          <a className={`header-link ${router.pathname === URL_SURPRISE ? 'active' : ''}`}>Surprise</a>
         </Link>
-        <Link href={URL_USER_JOURNEY}>
-          <a className={`header-link ${router.pathname === URL_USER_JOURNEY ? 'active' : ''}`}>User Journey</a>
+        <Link href={URL_ORIGINAL}>
+          <a className={`header-link ${router.pathname === URL_ORIGINAL ? 'active' : ''}`}>Original</a>
+        </Link>
+        <Link href={URL_APP}>
+          <a className={`header-link ${router.pathname === URL_APP ? 'active' : ''}`}>App</a>
         </Link>
       </div>
       <div className="list-menu-right">
-        <Button size="large" className="btn-get-app" onClick={() => router.push(URL_CONTACT)}>
-          Get in touch
+        <Button className="btn-upload menu-right-item" onClick={() => router.push('/')}>
+          <CloudUploadOutlined />
         </Button>
-        <div className="search">
-          <SearchOutlined />
+        <div className="search menu-right-item">
+          <Input placeholder="Search" allowClear onChange={onChange} className="input-search" />
+        </div>
+        <div className="menu-right-item">
+          <UserOutlined className="user-icon" />
+        </div>
+        <div className="menu-right-item dropdown">
+          <Dropdown overlay={menu}>
+            <div className="dropdown-value">{languageSelected?.name}</div>
+          </Dropdown>
         </div>
       </div>
     </div>

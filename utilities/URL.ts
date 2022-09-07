@@ -1,9 +1,8 @@
 export const URL_ROOT = '/';
-export const URL_PRODUCTS = '/products';
-export const URL_SERVICES = '/services';
-export const URL_ABOUT_US = '/about-us';
-export const URL_SUCCESS_STORIES = '/success-stories';
-export const URL_CONTACT = '/?contact=true';
-export const URL_BLOG = '/blog';
-export const URL_BLOG_DETAIL = '/blog-detail';
-export const URL_USER_JOURNEY = '/user-journey';
+export const URL_LASTEST = '/lastest';
+export const URL_CATEGORY = '/category';
+export const URL_NEW = '/new';
+export const URL_POPULAR = '/popular';
+export const URL_SURPRISE = '/surprise';
+export const URL_ORIGINAL = '/original';
+export const URL_APP = '/app';

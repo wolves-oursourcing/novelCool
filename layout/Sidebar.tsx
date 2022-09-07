@@ -3,16 +3,7 @@ import { Button, Drawer } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { FC, useState } from 'react';
-import {
-  URL_ABOUT_US,
-  URL_BLOG,
-  URL_CONTACT,
-  URL_PRODUCTS,
-  URL_ROOT,
-  URL_SERVICES,
-  URL_SUCCESS_STORIES,
-  URL_USER_JOURNEY
-} from '../utilities/URL';
+import { URL_APP, URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
 
 const SideBar: FC<{}> = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -54,45 +45,39 @@ const SideBar: FC<{}> = () => {
         <div className="group-link">
           <p className="mb-30">
             <a href={URL_ROOT} className="header-link">
-              Home
+              Latest
             </a>
           </p>
           <p className="mb-30">
-            <a href={URL_PRODUCTS} className="header-link">
-              Products{' '}
+            <a href={URL_CATEGORY} className="header-link">
+              Category
             </a>
           </p>
           <p className="mb-30">
-            <a href={URL_SERVICES} className="header-link">
-              Services
+            <a href={URL_NEW} className="header-link">
+              New
             </a>
           </p>
           <p className="mb-30">
-            <a href={URL_ABOUT_US} className="header-link">
-              About Us
+            <a href={URL_POPULAR} className="header-link">
+              Popular
             </a>
           </p>
           <p className="mb-30">
-            <a href={URL_SUCCESS_STORIES} className="header-link">
-              Success Stories
+            <a href={URL_SURPRISE} className="header-link">
+              Surprise
             </a>
           </p>
           <p className="mb-30">
-            <a href={URL_BLOG} className="header-link">
-              Blog
+            <a href={URL_ORIGINAL} className="header-link">
+              Original
             </a>
           </p>
           <p className="mb-30">
-            <a href={URL_USER_JOURNEY} className="header-link">
-              User Journey
+            <a href={URL_APP} className="header-link">
+              App
             </a>
           </p>
-        </div>
-
-        <div className="group-button">
-          <Button size="large" className="btn-get-app" onClick={() => router.push(URL_CONTACT)}>
-            Get in touch
-          </Button>
         </div>
       </Drawer>
     </div>
