@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { IResponse, PER_PAGE } from '../../api/configs';
 import withAppProvider from '../../hoc/withAppProvider';
-import blogService, { Blog } from '../../services/blog.service';
+import blogService, { Novel } from '../../services/novel.service';
 import BlogPageWrapper from '../../wrapper/blog';
 
 const BlogPage = () => {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<Novel[]>([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);

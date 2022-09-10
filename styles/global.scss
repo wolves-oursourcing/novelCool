@@ -81,3 +81,125 @@ input, button {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.wrap-content-page {
+  padding-top: 64px;
+}
+
+.slick-track {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  margin-bottom: 1rem;
+  .slick-slide {
+    margin-right: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.novel {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  border-radius: $borderRadius;
+  background-color: #fff;
+  border: 2px solid transparent;
+  box-shadow: $boxShadow;
+  &:hover {
+    cursor: pointer;
+    border-color: var(--color-primary);
+  }
+  .novel-image {
+    height: 245px;
+    position: relative;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .overlay {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.75);
+      color: #fff;
+      visibility: hidden;
+      opacity: 0;
+      transition: .15s ease-in-out;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      .novel-divider {
+        border-color: #fff;
+        margin: .5rem auto;
+      }
+      .novel-title {
+        color: #fff;
+      }
+    }
+    &:hover {
+      .overlay {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+    .more-detail {
+      color: var(--color-primary);
+      margin-top: auto;
+      font-size: 12px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .novel-brief {
+      font-size: 12px;
+    }
+  }
+  .novel-rate {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+  }
+  .novel-content {
+    &:hover {
+      .novel-title {
+        color: var(--color-primary);
+      }
+    }
+  }
+  .novel-title {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+  }
+  .novel-divider {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .novel-view {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    .icon {
+      margin-right: 1rem;
+    }
+  }
+}

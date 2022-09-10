@@ -29,7 +29,7 @@ const withAppProvider = (Page: any) => {
       <div className="wrapper-layout">
         <Header isScroll={sticky} />
         <SideBar />
-        <div className="container">
+        <div className="container wrap-content-page">
           <div id="container" ref={containerRef} />
           <Page {...props} />
         </div>

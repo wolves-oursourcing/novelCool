@@ -1,11 +1,16 @@
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useRef } from 'react';
 import ContactSection from './components/ContactSection';
-import FirstSection from './components/FirstSection';
+import BannerSection from './components/BannerSection';
 import ProductSection from './components/ProductSection';
 import ServicesSection from './components/ServicesSection';
+import { Novel } from '../../services/novel.service';
 
-const HomeWrapper: FC = () => {
+interface IPropsHomeWrapper {
+  novels?: Novel[];
+}
+const HomeWrapper = (props: IPropsHomeWrapper) => {
+  const { novels } = props;
   const scrollRef = useRef();
   const router = useRouter();
   const query = router.query;
@@ -27,7 +32,7 @@ const HomeWrapper: FC = () => {
 
   return (
     <>
-      <FirstSection />
+      <BannerSection novels={novels} />
       <ServicesSection />
       <ProductSection />
       <ContactSection scrollRef={scrollRef} />
