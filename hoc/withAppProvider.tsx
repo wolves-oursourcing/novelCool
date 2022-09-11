@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import SideBar from '../layout/Sidebar';
@@ -29,7 +29,7 @@ const withAppProvider = (Page: any) => {
       <div className="wrapper-layout">
         <Header isScroll={sticky} />
         <SideBar />
-        <div className="container wrap-content-page">
+        <div className="wrap-content-page">
           <div id="container" ref={containerRef} />
           <Page {...props} />
         </div>

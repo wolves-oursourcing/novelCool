@@ -1,0 +1,28 @@
+.novels-section {
+  background-color: var(--color-white);
+  padding: 40px 0;
+  &.gray {
+    background-color: var(--color-gray1);
+  }
+  .novels-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .novels-section-divider {
+    margin: .75rem 0 1.5rem 0;
+    border-top-width: 3px;
+  }
+  .novels-section-title {
+    margin: 0;
+  }
+  .list-novel {
+    display: grid;
+    gap: 20px 10px;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    .novel {
+      flex: 1;
+    }
+  }
+}

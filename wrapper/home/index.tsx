@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router';
-import React, { FC, useEffect, useRef } from 'react';
-import ContactSection from './components/ContactSection';
-import BannerSection from './components/BannerSection';
-import ProductSection from './components/ProductSection';
-import ServicesSection from './components/ServicesSection';
+import { useEffect, useRef } from 'react';
 import { Novel } from '../../services/novel.service';
+import BannerSection from './components/BannerSection';
+import NovelsSection from './components/NovelsSection';
 
 interface IPropsHomeWrapper {
   novels?: Novel[];
@@ -33,9 +31,14 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
   return (
     <>
       <BannerSection novels={novels} />
-      <ServicesSection />
-      <ProductSection />
-      <ContactSection scrollRef={scrollRef} />
+      <NovelsSection novels={novels} title="Latest" isGray={true} />
+      <NovelsSection novels={novels} title="Popular" />
+      <NovelsSection novels={novels} title="Completed" isGray={true} />
+      <NovelsSection novels={novels} title="Romance" />
+      <NovelsSection novels={novels} title="Comedy" isGray={true} />
+      <NovelsSection novels={novels} title="Fantasy" />
+      <NovelsSection novels={novels} title="Drama" isGray={true} />
+      <NovelsSection novels={novels} title="Action" />
     </>
   );
 };

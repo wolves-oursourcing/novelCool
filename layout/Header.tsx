@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import { CloudUploadOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Input, Menu } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button, Dropdown, Input, Menu } from 'antd';
 import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
 import { URL_APP, URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
-import { CloudUploadOutlined, UserOutlined } from '@ant-design/icons';
 
 interface ILanguage {
   code: string;
@@ -47,7 +47,7 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
     );
   };
   return (
-    <div className={`header container ${isScroll && 'scroll-sticky'}`}>
+    <div className={`header ${isScroll && 'scroll-sticky'}`}>
       <a className="logo" href={URL_ROOT}>
         <Image src="/img/sirrista-logo.png" alt="logo" width={86} height={50} />
       </a>

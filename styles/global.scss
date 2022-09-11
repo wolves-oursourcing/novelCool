@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'bootstrap/dist/css/bootstrap.css';
+
 
 @import './themes/Theme.scss';
 @import './themes/variables.scss';
@@ -87,16 +86,36 @@ input, button {
 }
 
 .slick-track {
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center;
   margin-bottom: 1rem;
-  .slick-slide {
-    margin-right: 20px;
-    &:last-child {
-      margin-right: 0;
+}
+.custom-dots {
+  bottom: -8px !important;
+  margin: 0 !important;
+  li {
+    width: 20px !important;
+    button  {
+      height: 0px !important;
+      &::before {
+        content: '' !important;
+        height: 16px !important;
+        width: 16px !important;
+        background-color: #cecac8;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        opacity: 1 !important;
+      }
+    }
+    &.slick-active {
+      width: 20px !important;
+      button::before {
+        background-color: #fff;
+        border-color: var(--color-primary);
+      }
     }
   }
+}
+.wrap-novel {
+  padding: 0 .5rem;
 }
 .novel {
   display: flex;
@@ -199,7 +218,65 @@ input, button {
     align-items: center;
     justify-content: flex-start;
     .icon {
-      margin-right: 1rem;
+      margin-right: .5rem;
     }
+  }
+  .novel-kind {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-primary);
+    padding: .25rem .5rem;
+    color: var(--color-white);
+    border-bottom-right-radius: $borderRadius;
+    font-size: 14px;
+  }
+  .novel-vote {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--color-yellow);
+    margin-top: .5rem ;
+    .list-star {
+      margin-left: 8px;
+      display: grid;
+      grid-auto-columns: minmax(0, 1fr);
+      gap: 2px;
+      grid-auto-flow: column;
+    }
+    .star {
+      position: relative;
+      display: flex;
+      align-items: center;
+      .star-active {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: 100%;
+        color: var(--color-yellow);
+        overflow: hidden;
+      }
+    }
+  }
+  .novel-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #6a6b68;
+  }
+}
+.more {
+  font-size: 13px;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  &:hover {
+    text-decoration: underline;
+  }
+  p {
+    margin: 0 4px 0 0;
+    font-weight: 600;
   }
 }

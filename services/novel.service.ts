@@ -1,5 +1,5 @@
-import { IResponse } from '../api/configs';
 import api from '../api/api';
+import { IResponse } from '../api/configs';
 
 export type NovelFilter = any;
 export interface Novel {
@@ -8,7 +8,10 @@ export interface Novel {
   title?: string;
   rate?: number;
   view?: number;
+  vote?: number;
   description?: string;
+  kind?: string;
+  createdAt?: Date;
 }
 
 const getBlogs = async (perPage?: number, page?: number, filter?: NovelFilter): Promise<IResponse> => {
