@@ -1,117 +1,42 @@
-import { BackTop, Button, Col, Input, notification, Row } from 'antd';
-import React, { FC, useState } from 'react';
-import Image from 'next/image';
-import { InstagramOutlined, SkypeOutlined, TwitterOutlined, WechatOutlined } from '@ant-design/icons';
+import { CopyrightCircleOutlined } from '@ant-design/icons';
+import { BackTop, Col, Row } from 'antd';
+import Link from 'next/link';
+import React, { FC } from 'react';
 const Footer: FC = () => {
-  const [email, setEmail] = useState('');
-
-  const handleSubscribe = (): void => {
-    const re = /\S+@\S+\.\S+/;
-
-    if (re.test(email)) {
-      setEmail('');
-      notification.success({
-        message: 'You have been submitted your information successful'
-      });
-    } else {
-      //TODO:
-      notification.error({
-        message: 'Please enter a valid email'
-      });
-    }
-  };
-  const handleChnageEmail = (e: any): void => {
-    setEmail(e.target.value);
-  };
   return (
     <>
       <div className="footer">
-        <div className="footer-top" />
-        <div className="footer-middle">
-          <Row>
-            <Col xs={24} md={12}>
-              <div className="block-left">
-                <div className="label">Get the lastes Updates</div>
-                <div className="d-flex">
-                  <Input
-                    value={email}
-                    size="large"
-                    className="input-email"
-                    placeholder="Your email"
-                    style={{ width: 200 }}
-                    onChange={e => handleChnageEmail(e)}
-                  />
-                  <Button size="large" className="btn-submit" onClick={handleSubscribe}>
-                    Get notified
-                  </Button>
-                </div>
-              </div>
-            </Col>
-            <Col xs={24} md={12}>
-              <div className="blog-right">
-                <Row>
-                  <Col xs={24} md={12}>
-                    <ul className="label">Site Links</ul>
-                    <li className="text">
-                      <a className="text" href="/products">
-                        Products
-                      </a>
-                    </li>
-                    <li className="text">
-                      <a className="text" href="/services">
-                        Services
-                      </a>
-                    </li>
-
-                    <li className="text">
-                      <a className="text" href="/success-stories">
-                        Success Stories
-                      </a>
-                    </li>
-
-                    <li className="text">
-                      <a className="text" href="/about-us">
-                        About Us
-                      </a>
-                    </li>
-
-                    <li className="text">
-                      <a className="text" href="/blog">
-                        Blog
-                      </a>
-                    </li>
-                  </Col>
-                  <Col xs={24} md={12}>
-                    <ul className="label">Support</ul>
-                    <li className="text">Contact Us</li>
-                    <li className="text">Terms of service</li>
-
-                    <a className="text" href="/privacy-policy">
-                      Privacy policy
-                    </a>
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-          </Row>
-        </div>
-        <div className="footer-bottom">
-          <div className="block-left">Sirrista ©. All Rights Reserved</div>
-          <div className="block-right">
-            <div className="icon">
-              <InstagramOutlined />
+        <Row className="container">
+          <Col span={12}>
+            <div className="d-flex flex-column align-items-center">
+              <ul className="ps-0 mb-0 d-flex">
+                <li className="d-flex px-4">
+                  <Link href="/">Privacy Policy</Link>
+                </li>
+                <li className="d-flex">
+                  <Link href="/">Terms of Use</Link>
+                </li>
+              </ul>
+              <ul className="ps-0 mb-0 d-flex mt-4">
+                <li className="d-flex px-4">
+                  <Link href="/">Latest Releases</Link>
+                </li>
+                <li className="d-flex px-4">
+                  <Link href="/">Popular Novels</Link>
+                </li>
+                <li className="d-flex px-4">
+                  <Link href="/">New Novels</Link>
+                </li>
+              </ul>
             </div>
-            <div className="icon">
-              <TwitterOutlined />
+          </Col>
+          <Col span={12} className="d-flex justify-content-center align-items-end">
+            <div className="copyright">
+              <CopyrightCircleOutlined />
+              2018 NovelCool.com
             </div>
-            <div className="icon">
-              <SkypeOutlined />
-            </div>
-            <div className="icon">
-              <WechatOutlined />
-            </div>
-          </div>
-        </div>
+          </Col>
+        </Row>
         <BackTop visible={true}></BackTop>
       </div>
     </>
