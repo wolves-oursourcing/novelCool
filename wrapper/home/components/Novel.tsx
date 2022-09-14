@@ -11,7 +11,7 @@ const { Title } = Typography;
 const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
   const { novel } = props;
   return (
-    <div className="novel" key={novel?.id}>
+    <div className="novel">
       <div className="novel-image">
         <img src={novel.image} alt="image" />
         <div className="novel-rate">{novel.rate}</div>
@@ -37,8 +37,8 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
           <span className="novel-vote-number">{novel.vote}</span>
           <div className="list-star">
             {range(0, 5).map(star => (
-              <div className="star">
-                <StarOutlined key={star} />
+              <div className="star" key={star}>
+                <StarOutlined />
                 <StarFilled
                   key={star}
                   className="star-active"

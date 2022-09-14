@@ -1,0 +1,61 @@
+.category-page {
+    .search {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        span {
+            margin-right: 1rem;
+        }
+    }
+    .novels-section-search {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 2rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: .15s ease-in-out;
+        max-height: 0;
+        &.active {
+            opacity: 1;
+            visibility: visible;
+            height: auto;
+            max-height: 500px;
+        }
+    }
+    .row-search {
+        display: flex;
+        width: 100%;
+        .label {
+            font-weight: 600;
+            min-width: 100px;
+            margin-right: 3rem;
+            text-align: right;
+        }
+        .list-search {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px 1rem;
+            margin-bottom: 1rem;
+            flex: 1;
+            justify-content: center;
+            &.year {
+                grid-template-columns: repeat(10, minmax(0, 1fr));
+            }
+            &.alphabet {
+                grid-template-columns: auto;
+                grid-auto-flow: column;
+                justify-content: flex-start;
+            }
+        }
+        .item-search {
+            cursor: pointer;
+            &:hover {
+                color: var(--color-primary);
+                text-decoration: underline;
+            }
+            &.all {
+                color: var(--color-primary);
+            }
+        }
+    }
+}
