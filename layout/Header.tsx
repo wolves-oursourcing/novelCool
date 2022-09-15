@@ -49,7 +49,7 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   return (
     <div className={`header ${isScroll && 'scroll-sticky'}`}>
       <a className="logo" href={URL_ROOT}>
-        <Image src="/img/sirrista-logo.png" alt="logo" width={86} height={50} />
+        <Image src="/img/logo.svg" alt="logo" width={86} height={50} />
       </a>
       <div className="list-menu">
         <Link href={URL_ROOT}>
