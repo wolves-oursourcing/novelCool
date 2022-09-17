@@ -228,6 +228,32 @@ input, button {
     color: var(--color-white);
     border-bottom-right-radius: $borderRadius;
     font-size: 14px;
+    &.blue {
+      background-color: var(--color-blue);
+    }
+  }
+  .novel-tags-list {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: .25rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    font-size: 10px;
+    color: var(--color-white);
+    max-width: 100%;
+    .novel-tags-item {
+      display: flex;
+      background-color: rgba(0,0,0,.8);
+      padding: 4px;
+      border-radius: 2px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+  }
+  .novel-timer {
+    font-size: .8rem;
   }
   .novel-vote {
     display: flex;
@@ -259,10 +285,31 @@ input, button {
   }
   .novel-footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
     color: #6a6b68;
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  .novel-follow {
+    display: flex;
+    align-items: center;
+    color: var(--color-primary);
+    margin-top: .5rem;
+    cursor: pointer;
+    &:hover {
+      span {
+        opacity: .8;
+      }
+    }
+    span {
+      margin-right: .5rem;
+    }
   }
 }
 .more {

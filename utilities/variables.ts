@@ -3,3 +3,8 @@ export enum Status {
   ONGOING = 'Ongoing',
   COMPLETED = 'Completed'
 }
+
+export enum NovelKind {
+  NOVEL = 'Novel',
+  MANGA = 'Manga'
+}

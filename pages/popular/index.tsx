@@ -2,9 +2,9 @@ import { PaginationProps } from 'antd';
 import { useEffect, useState } from 'react';
 import withAppProvider from '../../hoc/withAppProvider';
 import { Novel } from '../../services/novel.service';
-import NewPageWrapper from '../../wrapper/new';
+import PopularPageWrapper from '../../wrapper/popular';
 
-const NewPage = () => {
+const PopularPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [novels, setNovels] = useState<Novel[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -76,7 +76,7 @@ const NewPage = () => {
   };
   return (
     <div>
-      <NewPageWrapper
+      <PopularPageWrapper
         isLoading={isLoading}
         novels={novels}
         currentPage={currentPage}
@@ -87,4 +87,4 @@ const NewPage = () => {
   );
 };
 
-export default withAppProvider(NewPage);
+export default withAppProvider(PopularPage);

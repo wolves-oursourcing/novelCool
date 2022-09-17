@@ -1,23 +1,47 @@
-import { EyeOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
+import { EyeOutlined, PlusCircleOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
 import { Divider, Typography } from 'antd';
 import { range } from 'lodash';
 import moment from 'moment';
 import { FC } from 'react';
 import { Novel } from '../../../services/novel.service';
+import { NovelKind } from '../../../utilities/variables';
+
+export enum DisplayType {
+  NORMAL = 'NORMAL',
+  FOLLOW = 'FOLLOW'
+}
 interface IPropsNovel {
   novel: Novel;
+  isShowRate?: boolean;
+  isShowTags?: boolean;
+  isShowKind?: boolean;
+  displayType?: DisplayType;
 }
-const { Title } = Typography;
+const { Title, Text } = Typography;
 const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
-  const { novel } = props;
+  const { novel, isShowRate, isShowTags, isShowKind, displayType } = props;
+
+  const tags = ['Romance', 'Drama', 'School life']; // for demo
   return (
     <div className="novel">
       <div className="novel-image">
         <img src={novel.image} alt="image" />
-        <div className="novel-rate">{novel.rate}</div>
-        <div className="novel-kind">
-          <span>{novel.kind}</span>
-        </div>
+        {isShowRate && <div className="novel-rate">{novel.rate}</div>}
+        {isShowKind && (
+          <div className={`novel-kind ${novel.kind === NovelKind.MANGA ? 'blue' : ''}`}>
+            <span>{novel.kind}</span>
+          </div>
+        )}
+        {isShowTags && (
+          <ul className="novel-tags-list">
+            {tags.map(tag => (
+              <li key={tag} className="novel-tags-item">
+                {tag}
+              </li>
+            ))}
+          </ul>
+        )}
+
         <div className="overlay">
           <Title level={5} className="novel-title">
             Summary
@@ -58,11 +82,26 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
         </div>
         <Divider className="novel-divider" />
         <div className="novel-footer">
-          <div className="novel-view">
-            <EyeOutlined className="icon" />
-            <span>{novel.view}</span>
-          </div>
-          <div className="novel-timer">{moment(novel.createdAt).format('MMM DD, YYYY')}</div>
+          {displayType === DisplayType.FOLLOW ? (
+            <>
+              <div className="footer-top">
+                <Text ellipsis>Chapter 1691 dsfas fdsafdsaf dfas</Text>
+                <div className="novel-timer">{moment(novel.createdAt).format('MMM DD, YYYY')}</div>
+              </div>
+              <div className="novel-follow">
+                <PlusCircleOutlined />
+                <span>Follow</span>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="novel-view">
+                <EyeOutlined className="icon" />
+                <span>{novel.view}</span>
+              </div>
+              <div className="novel-timer">{moment(novel.createdAt).format('MMM DD, YYYY')}</div>
+            </>
+          )}
         </div>
       </div>
     </div>
