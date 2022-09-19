@@ -5,12 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import { URL_APP, URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
-
-interface ILanguage {
-  code: string;
-  name: string;
-  flag: string;
-}
+import { ILanguage } from '../utilities/variables';
 
 const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   const router = useRouter();

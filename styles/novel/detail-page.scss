@@ -1,0 +1,25 @@
+.novel-detail-page {
+    padding: 40px 0;
+    .detail-page-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .right {
+            display: flex;
+            align-items: center;
+            color: var(--text-color-gray);
+        }
+        .report-item {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+    .detail-page-divider {
+        margin: .75rem 0 1.5rem 0;
+        border-top-width: 3px;
+    }
+}

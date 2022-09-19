@@ -2,6 +2,7 @@ import { EyeOutlined, PlusCircleOutlined, StarFilled, StarOutlined } from '@ant-
 import { Divider, Typography } from 'antd';
 import { range } from 'lodash';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { Novel } from '../../../services/novel.service';
 import { NovelKind } from '../../../utilities/variables';
@@ -21,10 +22,12 @@ const { Title, Text } = Typography;
 const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
   const { novel, isShowRate, isShowTags, isShowKind, displayType } = props;
 
+  const router = useRouter();
+
   const tags = ['Romance', 'Drama', 'School life']; // for demo
   return (
     <div className="novel">
-      <div className="novel-image">
+      <div className="novel-image" onClick={() => router.push(`/novel/${novel.id}`)}>
         <img src={novel.image} alt="image" />
         {isShowRate && <div className="novel-rate">{novel.rate}</div>}
         {isShowKind && (
