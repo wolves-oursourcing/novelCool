@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import withAppProvider from '../../../hoc/withAppProvider';
 import { Novel } from '../../../services/novel.service';
 import DetailPageWrapper from '../../../wrapper/novel/detail-novel';
@@ -11,7 +11,8 @@ const DetailNovel = () => {
     id: 5,
     image: '/img/banner_test.jpg',
     title: '4Super Detective In The Fictional World',
-    description: 'Super Detective In The Fictional World',
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     rate: 4.0,
     vote: 3.5,
     view: 2610,
