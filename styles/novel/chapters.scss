@@ -1,0 +1,60 @@
+.chapter-view {
+    .list-chapter {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+    .item-chapter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        padding: .5rem 0;
+        border-bottom: 1px solid var(--color-gray1);
+        &:hover, &.active {
+            .chapter-name {
+                color: var(--color-primary);
+            }
+        }
+        &:first-child {
+            .right {
+                .icon {
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                }
+            }
+        }
+        .left {
+            display: flex;
+            transition: .15s ease-in-out;
+        }
+        .right {
+            display: flex;
+            font-size: .75rem;
+            color: var(--text-color-gray);
+            .item-right {
+                margin-right: 1rem;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    .see-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--color-primary);
+        border-radius: 10px;
+        padding: .5rem 0;
+        cursor: pointer;
+        margin-top: 1rem;
+        span {
+            color: var(--color-primary);
+        }
+    }
+    .chapter-content {
+        padding: 1rem 0;
+    }
+}

@@ -14,6 +14,8 @@
 @import './category/category.scss';
 @import './new/new.scss';
 @import './novel/detail-page.scss';
+@import './novel/tab-view.scss';
+@import './novel/chapters.scss';
 
 
 html,
@@ -395,6 +397,24 @@ input, button {
   }
   
 }
+
+.novel-suggest {
+  display: flex;
+  flex-direction: column;
+  .novel-image {
+    max-width: 100%;
+    height: 245px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .novel-title {
+    margin-top: .25rem;
+  }
+}
+
 .more {
   font-size: 13px;
   color: var(--color-primary);

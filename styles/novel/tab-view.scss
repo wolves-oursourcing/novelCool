@@ -1,0 +1,15 @@
+.custom-tabs {
+    .ant-tabs-tab {
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+    .ant-tabs-tab-active {
+        .ant-tabs-tab-btn {
+            color: var(--color-primary);
+        }
+    }
+    .ant-tabs-ink-bar {
+        background-color: var(--color-primary);
+    }
+}

@@ -17,8 +17,35 @@ const DetailNovel = () => {
     vote: 3.5,
     view: 2610,
     kind: 'Manga',
-    createdAt: new Date()
+    createdAt: new Date(),
+    chapters: [
+      {
+        id: 1,
+        name: 'Blood Warlock: Succubus Partner in the Apocalypse C380 – 1000 Stamina Points: Internal Organs Strengthening',
+        view: 1269,
+        createdAt: new Date()
+      },
+      {
+        id: 3,
+        name: 'Blood Warlock: Succubus Partner in the Apocalypse C380 – 1000 Stamina Points: Internal Organs Strengthening',
+        view: 1269,
+        createdAt: new Date()
+      },
+      {
+        id: 4,
+        name: 'Blood Warlock: Succubus Partner in the Apocalypse C380 – 1000 Stamina Points: Internal Organs Strengthening',
+        view: 1269,
+        createdAt: new Date()
+      },
+      {
+        id: 5,
+        name: 'Blood Warlock: Succubus Partner in the Apocalypse C380 – 1000 Stamina Points: Internal Organs Strengthening',
+        view: 1269,
+        createdAt: new Date()
+      }
+    ]
   });
+  const [novelsSuggest, setNovelsSuggest] = useState<Novel[]>([]);
   const { id } = router.query;
   console.log(router, 'router');
   console.log(id, 'query');
@@ -77,12 +104,69 @@ const DetailNovel = () => {
 
   useEffect(() => {
     getNovels();
+    setNovelsSuggest([
+      {
+        id: 1,
+        image: '/img/banner_test.jpg',
+        title: 'Super Detective In The Fictional World',
+        description: 'Super Detective In The Fictional World',
+        rate: 4.0,
+        vote: 4,
+        view: 2610,
+        kind: 'Novel',
+        createdAt: new Date()
+      },
+      {
+        id: 2,
+        image: '/img/novel2.jpg',
+        title: '1Super Detective In The Fictional World',
+        description: 'Super Detective In The Fictional World',
+        rate: 4.0,
+        vote: 4,
+        view: 2610,
+        kind: 'Novel',
+        createdAt: new Date()
+      },
+      {
+        id: 3,
+        image: '/img/banner_test.jpg',
+        title: '2Super Detective In The Fictional World',
+        description: 'Super Detective In The Fictional World',
+        rate: 4.0,
+        vote: 4.7,
+        view: 2610,
+        kind: 'Novel',
+        createdAt: new Date()
+      },
+      {
+        id: 4,
+        image: '/img/banner_test.jpg',
+        title: '3Super Detective In The Fictional World',
+        description: 'Super Detective In The Fictional World',
+        rate: 4.0,
+        vote: 2,
+        view: 2610,
+        kind: 'Novel',
+        createdAt: new Date()
+      },
+      {
+        id: 5,
+        image: '/img/banner_test.jpg',
+        title: '4Super Detective In The Fictional World',
+        description: 'Super Detective In The Fictional World',
+        rate: 4.0,
+        vote: 3.5,
+        view: 2610,
+        kind: 'Novel',
+        createdAt: new Date()
+      }
+    ]);
   }, [id]);
 
   const getNovels = async () => {};
   return (
     <div>
-      <DetailPageWrapper novel={novel} isLoading={isLoading} />
+      <DetailPageWrapper novel={novel} isLoading={isLoading} comments={comments} novelsSuggest={novelsSuggest} />
     </div>
   );
 };

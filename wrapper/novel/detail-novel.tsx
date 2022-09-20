@@ -1,17 +1,22 @@
 import { FacebookOutlined, StarFilled, StarOutlined, WarningOutlined } from '@ant-design/icons';
-import { Button, Divider, Dropdown, Menu, Typography } from 'antd';
+import { Button, Divider, Dropdown, Menu, Tabs, Typography } from 'antd';
 import { useState } from 'react';
+import { Comment } from '../../api/comment';
 import { Novel } from '../../services/novel.service';
 import { ILanguage, NovelKind } from '../../utilities/variables';
+import ChapterView from './chapters';
+import CommentView from './comments';
 
 interface IPropsDetailPageWrapper {
   novel: Novel;
   isLoading: boolean;
+  comments: Comment[];
+  novelsSuggest?: Novel[];
 }
 const { Title, Text, Paragraph } = Typography;
 
 const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
-  const { novel, isLoading } = props;
+  const { novel, isLoading, comments, novelsSuggest } = props;
 
   const languages: ILanguage[] = [
     {
@@ -43,6 +48,9 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
       expand: false,
       counter: !expandable.expand ? expandable.counter + 0 : expandable.counter + 1
     });
+  };
+  const onChangeTab = (key: string) => {
+    console.log(key);
   };
 
   const menu = () => {
@@ -144,6 +152,40 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
             <Button className="btn-common primary me-3">Start Reading</Button>
             <Button className="btn-common primary outline">Follow</Button>
           </div>
+        </div>
+      </div>
+      <Tabs
+        defaultActiveKey="1"
+        onChange={onChangeTab}
+        className="custom-tabs"
+        items={[
+          {
+            label: `Comments`,
+            key: '1',
+            children: <CommentView />
+          },
+          {
+            label: `Chapters`,
+            key: '2',
+            children: <ChapterView chapters={novel.chapters} />
+          }
+        ]}
+      />
+
+      <div className="suggest">
+        <Title level={4}>You may like</Title>
+        <div className="list-novel-suggest">
+          {novelsSuggest &&
+            novelsSuggest.map(novel => (
+              <div className="novel-suggest" key={novel?.id}>
+                <div className="novel-image">
+                  <img src={novel?.image} />
+                </div>
+                <Title level={5} ellipsis className="novel-title">
+                  {novel?.title}
+                </Title>
+              </div>
+            ))}
         </div>
       </div>
     </div>
