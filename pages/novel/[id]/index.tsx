@@ -61,6 +61,7 @@ const DetailNovel = () => {
           'https://static.lightnovelpub.com/content/img/lightnovelpub/usravatar/4bfc6537014d4154a3a86da21f9b1e5e.jpg?637832816200070000',
         role: 'READER'
       },
+      rate: 1,
       children: [
         {
           id: 1,
@@ -98,7 +99,8 @@ const DetailNovel = () => {
         avatar:
           'https://static.lightnovelpub.com/content/img/lightnovelpub/usravatar/4bfc6537014d4154a3a86da21f9b1e5e.jpg?637832816200070000',
         role: 'READER'
-      }
+      },
+      rate: 2
     }
   ]);
 

@@ -162,7 +162,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
           {
             label: `Comments`,
             key: '1',
-            children: <CommentView />
+            children: <CommentView comments={comments} />
           },
           {
             label: `Chapters`,
