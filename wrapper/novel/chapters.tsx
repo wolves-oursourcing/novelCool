@@ -1,6 +1,7 @@
 import { DownOutlined, SortAscendingOutlined, SortDescendingOutlined, UpOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Chapter } from '../../services/novel.service';
 
@@ -15,6 +16,7 @@ const ChapterView = (props: IPropsChapter) => {
   const [expand, setExpand] = useState<boolean>(false);
   const [continueReading, setContinueReading] = useState<boolean>(false);
   const [selectedChapter, setSelectedChapter] = useState<Chapter>();
+  const route = useRouter();
   useEffect(() => {
     if (chapters && chapters.length > 0) {
       setSelectedChapter(chapters[0]);
@@ -49,7 +51,7 @@ const ChapterView = (props: IPropsChapter) => {
               </div>
             </li>
           ))}
-        <li className="item-chapter see-more">
+        <li className="item-chapter see-more" onClick={() => route.push(`/novel/${1}/chapter`)}>
           <div className="d-flex align-items-center">
             <Text className="me-1"> More chapters</Text>
             <div className="d-flex" onClick={() => setExpand(!expand)}>

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import ReadingWrapper from '../../../wrapper/novel/read';
 
 const ReadingView = () => {
   const router = useRouter();
@@ -19,7 +20,11 @@ const ReadingView = () => {
       console.log(e);
     }
   };
-  return <div>chapter</div>;
+  return (
+    <div>
+      <ReadingWrapper />
+    </div>
+  );
 };
 
 export default ReadingView;
