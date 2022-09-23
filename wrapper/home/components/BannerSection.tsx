@@ -2,6 +2,7 @@ import { EyeOutlined } from '@ant-design/icons';
 import { Carousel, Divider, Row, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import { Novel } from '../../../services/novel.service';
+import {useRouter} from "next/router";
 
 interface IPropsBannerSection {
   novels?: Novel[];
@@ -17,7 +18,7 @@ const settings = {
 const BannerSection = (props: IPropsBannerSection) => {
   const { novels } = props;
   const [novelHovered, setNovelHovered] = useState<Novel>();
-
+  const router = useRouter();
   useEffect(() => {
     if (novels && novels.length > 0) {
       setNovelHovered(novels[0]);
@@ -39,7 +40,7 @@ const BannerSection = (props: IPropsBannerSection) => {
               <Carousel {...settings} afterChange={onChange} className="w-100">
                 {novels.map(novel => (
                   <div className="wrap-novel" key={novel.id} onMouseEnter={() => setNovelHovered(novel)}>
-                    <div className="novel">
+                    <div onClick={() => router.push(`/novel/${novel.id}`)} className="novel">
                       <div className="novel-image">
                         <img src={novel.image} alt="image" />
                         <div className="novel-rate">{novel.rate}</div>

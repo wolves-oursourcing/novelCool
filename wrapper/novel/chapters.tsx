@@ -40,7 +40,7 @@ const ChapterView = (props: IPropsChapter) => {
             <li
               key={chapter?.id}
               className={`item-chapter ${selectedChapter?.id === chapter.id ? 'active' : ''}`}
-              onClick={() => setSelectedChapter(chapter)}
+              onClick={() => route.push(`/novel/${1}/chapter`)}
             >
               <div className="left">
                 <Text className="chapter-name">{chapter?.name}</Text>
