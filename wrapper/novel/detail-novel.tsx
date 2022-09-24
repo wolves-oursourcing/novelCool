@@ -6,6 +6,7 @@ import { Novel } from '../../services/novel.service';
 import { ILanguage, NovelKind } from '../../utilities/variables';
 import ChapterView from './chapters';
 import CommentView from './comments';
+import {useRouter} from "next/router";
 
 interface IPropsDetailPageWrapper {
   novel: Novel;
@@ -17,7 +18,7 @@ const { Title, Text, Paragraph } = Typography;
 
 const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
   const { novel, isLoading, comments, novelsSuggest } = props;
-
+  const route = useRouter();
   const languages: ILanguage[] = [
     {
       code: 'uk',
@@ -149,7 +150,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
             <li>Romance</li>
           </ul>
           <div className="novel-actions mt-4">
-            <Button className="btn-common primary me-3">Start Reading</Button>
+            <Button onClick={() => route.push(`/novel/${1}/chapter`)} className="btn-common primary me-3">Start Reading</Button>
             <Button className="btn-common primary outline">Follow</Button>
           </div>
         </div>
