@@ -30,11 +30,15 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
   const menu = () => {
     return (
       <Menu
+        selectable
         items={languages.map((language, index) => {
           return {
             key: index + 1,
             label: (
-              <div onClick={() => setLanguageSelected(language)} className="item-drop-language">
+              <div
+                onClick={() => setLanguageSelected(language)}
+                className={`item-drop-language ${languageSelected.code === language.code ? 'selected' : ''}`}
+              >
                 <img src={language?.flag} alt="flag" />
                 <Text>{language.name}</Text>
               </div>
@@ -53,7 +57,7 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
         <div className="header-right">
           <CloudUploadOutlined className="download" />
           <div className="header-right-item dropdown">
-            <Dropdown overlay={menu}>
+            <Dropdown overlay={menu} overlayClassName="drop-lang">
               <div className="dropdown-value">
                 <img src={languageSelected?.flag} alt="flag" />
               </div>

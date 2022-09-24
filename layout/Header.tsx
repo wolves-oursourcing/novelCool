@@ -1,5 +1,5 @@
 import { CloudUploadOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Input, Menu } from 'antd';
+import { Button, Dropdown, Input, Menu, Typography } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,18 +7,19 @@ import { FC, useState } from 'react';
 import { URL_APP, URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
 import { ILanguage } from '../utilities/variables';
 
+const { Text } = Typography;
 const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   const router = useRouter();
   const languages: ILanguage[] = [
     {
       code: 'uk',
       name: 'England',
-      flag: ''
+      flag: '/flags/england.png'
     },
     {
       code: 'fr',
       name: 'France',
-      flag: ''
+      flag: '/flags/france.svg'
     }
   ];
 
@@ -32,10 +33,19 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   const menu = () => {
     return (
       <Menu
+        selectable
         items={languages.map((language, index) => {
           return {
             key: index + 1,
-            label: <div onClick={() => setLanguageSelected(language)}>{language?.name}</div>
+            label: (
+              <div
+                onClick={() => setLanguageSelected(language)}
+                className={`item-drop-language ${languageSelected.code === language.code ? 'selected' : ''}`}
+              >
+                <img src={language?.flag} alt="flag" />
+                <Text>{language.name}</Text>
+              </div>
+            )
           };
         })}
       />
@@ -77,10 +87,10 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
           <Input placeholder="Search" allowClear onChange={onChange} className="input-search" />
         </div>
         <div className="menu-right-item">
-          <UserOutlined className="user-icon" />
+          <UserOutlined className="user-icon" onClick={() => router.push('/auth/login')} />
         </div>
         <div className="menu-right-item dropdown">
-          <Dropdown overlay={menu}>
+          <Dropdown overlay={menu} overlayClassName="drop-lang">
             <div className="dropdown-value">{languageSelected?.name}</div>
           </Dropdown>
         </div>

@@ -18,6 +18,7 @@
 @import './novel/chapters.scss';
 @import './novel/comments.scss';
 @import './novel/read.scss';
+@import './auth/auth.scss';
 
 
 html,
@@ -445,14 +446,37 @@ input, button {
     }
   }
 }
+.drop-lang {
+  .ant-dropdown-menu {
+    padding: 0;
+    box-shadow: 0 2px 4px 1px #000;
+    background-color: var(--bg-color-header);
+  }
+  .ant-dropdown-menu-item {
+    background-color: var(--bg-color-header);
+    &:hover, &.ant-dropdown-menu-item-selected {
+      background-color: var(--color-primary-hover);
+      opacity: 1;
+      .item-drop-language{
+        span {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+}
 .item-drop-language {
   display: flex;
   align-items: center;
   cursor: pointer;
+  background-color: transparent;
   border-bottom: 1px solid var(--color-gray);
   padding: .25rem 0;
   img {
     width: 40px;
     margin-right: .5rem;
+  }
+  span {
+    color: var(--text-color-header);
   }
 }
