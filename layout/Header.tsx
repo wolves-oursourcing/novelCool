@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
-import { URL_APP, URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
+import { URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
 import { ILanguage } from '../utilities/variables';
 
 const { Text } = Typography;
@@ -24,7 +24,7 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   ];
 
   const [languageSelected, setLanguageSelected] = useState<ILanguage>(languages[0]);
-
+  const [randomNovelId, setRandomNovelId] = useState(1);
   const onChange = (e: any) => {
     console.log(e);
   };
@@ -69,14 +69,11 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
         <Link href={URL_POPULAR}>
           <a className={`header-link ${router.pathname === URL_POPULAR ? 'active' : ''}`}>Popular</a>
         </Link>
-        <Link href={URL_SURPRISE}>
+        <Link href={`/novel/${randomNovelId}`}>
           <a className={`header-link ${router.pathname === URL_SURPRISE ? 'active' : ''}`}>Surprise</a>
         </Link>
         <Link href={URL_ORIGINAL}>
           <a className={`header-link ${router.pathname === URL_ORIGINAL ? 'active' : ''}`}>Original</a>
-        </Link>
-        <Link href={URL_APP}>
-          <a className={`header-link ${router.pathname === URL_APP ? 'active' : ''}`}>App</a>
         </Link>
       </div>
       <div className="list-menu-right">
@@ -91,7 +88,9 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
         </div>
         <div className="menu-right-item dropdown">
           <Dropdown overlay={menu} overlayClassName="drop-lang">
-            <div className="dropdown-value">{languageSelected?.name}</div>
+            <div className="dropdown-value">
+              <img src={languageSelected?.flag} alt="flag" />
+            </div>
           </Dropdown>
         </div>
       </div>

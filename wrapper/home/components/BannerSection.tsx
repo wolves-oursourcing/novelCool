@@ -1,11 +1,12 @@
 import { EyeOutlined } from '@ant-design/icons';
 import { Carousel, Divider, Row, Typography } from 'antd';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Novel } from '../../../services/novel.service';
-import {useRouter} from "next/router";
 
 interface IPropsBannerSection {
   novels?: Novel[];
+  title?: string;
 }
 const { Title } = Typography;
 const settings = {
@@ -16,7 +17,7 @@ const settings = {
   slidesToScroll: 1
 };
 const BannerSection = (props: IPropsBannerSection) => {
-  const { novels } = props;
+  const { novels, title } = props;
   const [novelHovered, setNovelHovered] = useState<Novel>();
   const router = useRouter();
   useEffect(() => {
@@ -75,7 +76,7 @@ const BannerSection = (props: IPropsBannerSection) => {
           </Row>
         </div>
         <Title level={1} className="banner-title">
-          Popular
+          {title ? title : 'Popular'}
         </Title>
       </div>
     </>
