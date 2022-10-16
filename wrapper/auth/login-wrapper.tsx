@@ -1,10 +1,20 @@
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Divider, Form, Input, Typography } from 'antd';
+import {getUserInfo, login} from "../../services/user.service";
+import {Config} from "../../api/configs";
+import Router from "next/router";
+
 
 const { Title, Text } = Typography;
 const LoginWrapper = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const onFinish = async (data: any) => {
+    console.log('Success:', data);
+    const response = await login(data);
+    const accessToken = response.access_token ? response.access_token : "";
+    localStorage.setItem(Config.TOKEN, accessToken);
+    const userInfo = await getUserInfo(response.userId ? response.userId : 0);
+    localStorage.setItem(Config.USER, JSON.stringify(userInfo));
+    Router.push("/");
   };
 
   const onFinishFailed = (errorInfo: any) => {

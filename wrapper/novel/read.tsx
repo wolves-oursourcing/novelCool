@@ -4,8 +4,13 @@ import { useEffect, useState } from 'react';
 import Footer from '../../layout/Footer';
 import { ILanguage } from '../../utilities/variables';
 import AsideActions from './components/AsideActions';
+import {Config} from "../../api/configs";
+import novelService, {Chapter, Novel} from "../../services/novel.service";
 
-interface IPropsReadingPage {}
+interface IPropsReadingPage {
+  chapter: Chapter;
+  novel: Novel
+}
 const { Title, Text, Paragraph } = Typography;
 const languages: ILanguage[] = [
   {
@@ -22,10 +27,37 @@ const languages: ILanguage[] = [
 
 const ReadingWrapper = (props: IPropsReadingPage) => {
   const [languageSelected, setLanguageSelected] = useState<ILanguage>(languages[0]);
-
+  const { chapter, novel } = props;
+  const [data, setData] = useState<any>("");
+  const [allChapter, setAllChapter] = useState<any>([]);
   useEffect(() => {
     setLanguageSelected(languages[0]);
+    getAllChapter();
   }, []);
+
+  const getAllChapter = async () => {
+    try {
+      const resAll = await novelService.getChapterNovel({novelUniqueName: novel.uniqueName});
+      const allChap = resAll[0].filter((value: Chapter) => value.novel && value.novel.uniqueName === novel.uniqueName);
+      setAllChapter(allChap);
+      await getData();
+      // if (data) {
+      //   getData();
+      //   // checkIsFirst(allChap);
+      //   // checkIsLast(allChap);
+      // }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getData = async () => {
+    const res = await fetch(
+        `${Config.URL_API}files/download/chapterFiles?file=${chapter.content}`
+    );
+    const story = await res.text();
+    setData(story);
+  };
   // RENDER
   const menu = () => {
     return (
@@ -80,10 +112,9 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
             </li>
           </ul>
           <div className="reading">
-            <Title level={5}>Supreme Magus Chapter 0.1</Title>
+
             <Paragraph>
-              No matter if you are a pessimist or an optimist, Derek Esposito's life wasn't a good one nor a bad one. It
-              was just a mediocre insignificant existence.
+              {data}
             </Paragraph>
           </div>
         </div>

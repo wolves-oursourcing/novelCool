@@ -42,3 +42,12 @@ export const listPersonal = [
     name: 'Business'
   }
 ];
+
+export enum NovelStatus {
+  ONGOING = "Ongoing",
+  CANCEL = "Cancel",
+  COMPLETE = "Complete",
+}
+
+export const IMAGE_DEFAULT = "/assets/image/no_image.jpg";
+export const AVATAR_DEFAULT = "/assets/image/avatar_test.jpg";

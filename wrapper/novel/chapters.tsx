@@ -3,25 +3,36 @@ import { Typography } from 'antd';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Chapter } from '../../services/novel.service';
-
+import {Chapter, Novel} from '../../services/novel.service';
+import novelService from '../../services/novel.service';
 interface IPropsChapter {
-  chapters?: Chapter[];
+  novel: Novel;
 }
 
 const { Title, Text, Paragraph } = Typography;
 const ChapterView = (props: IPropsChapter) => {
-  const { chapters } = props;
+  const { novel } = props;
   const [ascend, setAscend] = useState<boolean>(false);
   const [expand, setExpand] = useState<boolean>(false);
   const [continueReading, setContinueReading] = useState<boolean>(false);
   const [selectedChapter, setSelectedChapter] = useState<Chapter>();
+  const [chapters, setChapters] = useState<Chapter[]>([]);
   const route = useRouter();
   useEffect(() => {
-    if (chapters && chapters.length > 0) {
-      setSelectedChapter(chapters[0]);
+    getChapterOfNovel();
+  }, [novel]);
+
+  const getChapterOfNovel = async () => {
+    const res = await novelService.getChapterNovel({novelUniqueName: novel.uniqueName});
+    if (res[0] && res[0].length > 0) {
+      setSelectedChapter(res[0][0]);
     }
-  }, [chapters]);
+    setChapters(res[0]);
+  }
+
+  const gotoRead = (uniqueName: string) => {
+    route.push(`/novel/${novel.uniqueName}/${uniqueName}`)
+  }
   return (
     <div className="chapter-view">
       <ul className="list-chapter">
@@ -36,11 +47,11 @@ const ChapterView = (props: IPropsChapter) => {
           </div>
         </li>
         {chapters &&
-          chapters.map(chapter => (
+        chapters.map(chapter => (
             <li
               key={chapter?.id}
               className={`item-chapter ${selectedChapter?.id === chapter.id ? 'active' : ''}`}
-              onClick={() => route.push(`/novel/${1}/chapter`)}
+              onClick={() => gotoRead(chapter.uniqueName)}
             >
               <div className="left">
                 <Text className="chapter-name">{chapter?.name}</Text>
@@ -51,14 +62,14 @@ const ChapterView = (props: IPropsChapter) => {
               </div>
             </li>
           ))}
-        <li className="item-chapter see-more" onClick={() => route.push(`/novel/${1}/chapter`)}>
-          <div className="d-flex align-items-center">
-            <Text className="me-1"> More chapters</Text>
-            <div className="d-flex" onClick={() => setExpand(!expand)}>
-              {expand ? <UpOutlined /> : <DownOutlined />}
-            </div>
-          </div>
-        </li>
+        {/*<li className="item-chapter see-more" onClick={() => route.push(`/novel/${1}/chapter`)}>*/}
+        {/*  <div className="d-flex align-items-center">*/}
+        {/*    <Text className="me-1"> More chapters</Text>*/}
+        {/*    <div className="d-flex" onClick={() => setExpand(!expand)}>*/}
+        {/*      {expand ? <UpOutlined /> : <DownOutlined />}*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*</li>*/}
       </ul>
       <div className="chapter-content">
         <Title level={5}>Chapter 1</Title>

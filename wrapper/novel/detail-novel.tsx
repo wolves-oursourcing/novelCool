@@ -1,12 +1,14 @@
 import { FacebookOutlined, StarFilled, StarOutlined, WarningOutlined } from '@ant-design/icons';
 import { Button, Divider, Dropdown, Menu, Tabs, Typography } from 'antd';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Comment } from '../../api/comment';
 import { Novel } from '../../services/novel.service';
 import { ILanguage, NovelKind } from '../../utilities/variables';
 import ChapterView from './chapters';
 import CommentView from './comments';
 import {useRouter} from "next/router";
+import ShowImage from "../../layout/ShowImage";
+import {patchUser} from "../../services/user.service";
 
 interface IPropsDetailPageWrapper {
   novel: Novel;
@@ -19,6 +21,7 @@ const { Title, Text, Paragraph } = Typography;
 const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
   const { novel, isLoading, comments, novelsSuggest } = props;
   const route = useRouter();
+  const [changeButton, setChangeButton] = useState(false);
   const languages: ILanguage[] = [
     {
       code: 'uk',
@@ -54,6 +57,10 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
     console.log(key);
   };
 
+  useEffect(() => {
+    checkIsInLib();
+  }, [novel]);
+
   const menu = () => {
     return (
       <Menu
@@ -65,6 +72,47 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
         })}
       />
     );
+  };
+
+  const gotoChapter = () => {
+    if(novel.chapters && novel.chapters?.length > 0) {
+      route.push(`/novel/${novel.uniqueName}/${novel?.chapters[0]?.uniqueName}`)
+    }
+  }
+
+  const gotoRead = (uniqueName: string) => {
+    route.push(`/novel/${novel.uniqueName}/${uniqueName}`)
+  }
+
+  const addBookMark = async (change: boolean) => {
+    try {
+      const user = localStorage.getItem("user");
+      if (user) {
+        const data = JSON.parse(user);
+        if (change) {
+          data.bookmark.push(novel.id.toString());
+          setChangeButton(true);
+        } else {
+          data.bookmark.splice(data.bookmark.indexOf(novel.id), 1);
+          setChangeButton(false);
+        }
+        console.log(data.bookmark);
+        const res = await patchUser(data.id, { bookmark: data.bookmark });
+      }
+    } catch (e) {
+    }
+  };
+
+  const checkIsInLib = () => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      setChangeButton(false);
+    }
+    if (user) {
+      const data = JSON.parse(user);
+      const bm = data.bookmark.find((value: any) => value === novel.id);
+      setChangeButton(!!bm);
+    }
   };
   return (
     <div className="novel-detail-page container">
@@ -89,21 +137,21 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
       <Divider className="detail-page-divider" />
       <div className="novel-detail">
         <div className="novel-image">
-          <img src={novel.image} alt="image" />
+          <ShowImage image={novel.image} container="images" />
           <div className={`novel-kind ${novel.kind === NovelKind.MANGA ? 'blue' : ''}`}>
             <span>{novel.kind}</span>
           </div>
         </div>
         <div className="novel-content">
           <Title level={3} className="novel-title">
-            {novel.title}
+            {novel.name}
           </Title>
           <div className="novel-source">
             <Text>Origin</Text>
           </div>
           <div className="novel-follow mt-2">
             <div className="novel-follow-item">
-              <Text>106</Text>
+              <Text>{novel.bookmarked}</Text>
               <Text className="caption">Followers</Text>
             </div>
             <div className="novel-follow-item">
@@ -120,10 +168,10 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
                 </div>
               </div>
 
-              <Text className="caption">{novel?.vote} Votes</Text>
+              <Text className="caption">{novel?.rate} Votes</Text>
             </div>
             <div className="novel-follow-item">
-              <Text>{novel.view}</Text>
+              <Text>{novel.views}</Text>
               <Text className="caption">Views</Text>
             </div>
           </div>
@@ -146,12 +194,18 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
             )}
           </div>
           <ul className="novel-category mt-2">
-            <li>Ongoing</li>
-            <li>Romance</li>
+            <li>{novel.status}</li>
+            {
+              novel.categories?.map(cate => (
+                <li>cate.name</li>
+              ))
+            }
+
           </ul>
           <div className="novel-actions mt-4">
-            <Button onClick={() => route.push(`/novel/${1}/chapter`)} className="btn-common primary me-3">Start Reading</Button>
-            <Button className="btn-common primary outline">Follow</Button>
+            <Button onClick={() => gotoChapter()} className="btn-common primary me-3">Start Reading</Button>
+            {!changeButton && (<Button onClick={() => addBookMark(true)} className="btn-common primary outline">Follow</Button>)}
+            {changeButton && (<Button onClick={() => addBookMark(false)} className="btn-common primary outline">UnFollow</Button>)}
           </div>
         </div>
       </div>
@@ -168,7 +222,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
           {
             label: `Chapters`,
             key: '2',
-            children: <ChapterView chapters={novel.chapters} />
+            children: <ChapterView novel={novel} />
           }
         ]}
       />
@@ -183,7 +237,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
                   <img src={novel?.image} />
                 </div>
                 <Title level={5} ellipsis className="novel-title">
-                  {novel?.title}
+                  {novel?.name}
                 </Title>
               </div>
             ))}

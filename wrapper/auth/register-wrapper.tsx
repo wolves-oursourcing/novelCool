@@ -1,10 +1,23 @@
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
-
+import {signUp} from "../../services/user.service";
+import Router from "next/router";
 const { Title, Text } = Typography;
 const RegisterWrapper = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const onFinish = async (value: any) => {
+    console.log('Success:', value);
+    try {
+      const user = await signUp({
+        username: value.username,
+        email: value.email,
+        password: value.password,
+        passwordConfirm: value.confirmPassword
+      });
+      console.log(user);
+      Router.push('/login')
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {

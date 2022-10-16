@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { Novel } from '../../../services/novel.service';
 import { NovelKind } from '../../../utilities/variables';
+import ShowImage from "../../../layout/ShowImage";
 
 export enum DisplayType {
   NORMAL = 'NORMAL',
@@ -24,11 +25,16 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
 
   const router = useRouter();
 
+  const gotoDetail = (id?: string) => {
+    console.log(id);
+    router.push(`/novel/${id}`)
+  }
+
   const tags = ['Romance', 'Drama', 'School life']; // for demo
   return (
     <div className="novel">
-      <div className="novel-image" onClick={() => router.push(`/novel/${novel.id}`)}>
-        <img src={novel.image} alt="image" />
+      <div className="novel-image" onClick={() => router.push(`/novel/${novel.uniqueName}`)}>
+        <ShowImage image={novel.image} container="images" />
         {isShowRate && <div className="novel-rate">{novel.rate}</div>}
         {isShowKind && (
           <div className={`novel-kind ${novel.kind === NovelKind.MANGA ? 'blue' : ''}`}>
@@ -56,9 +62,9 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
           </a>
         </div>
       </div>
-      <div className="novel-content">
+      <div onClick={() => gotoDetail(novel.uniqueName)} className="novel-content">
         <Title level={5} className="novel-title">
-          {novel.title}
+          {novel.name}
         </Title>
         <div className="novel-vote">
           <span className="novel-vote-number">{novel.vote}</span>
@@ -100,7 +106,7 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
             <>
               <div className="novel-view">
                 <EyeOutlined className="icon" />
-                <span>{novel.view}</span>
+                <span>{novel.views}</span>
               </div>
               <div className="novel-timer">{moment(novel.createdAt).format('MMM DD, YYYY')}</div>
             </>

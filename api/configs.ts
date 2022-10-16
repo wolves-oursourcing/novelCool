@@ -1,5 +1,7 @@
 export const Config = {
-  URL_API: 'https://sirrista-api.herokuapp.com/'
+  URL_API: 'http://localhost:3002/',
+  TOKEN: 'token',
+  USER: 'user'
 };
 
 export const RESPONSE_STATUS = {
