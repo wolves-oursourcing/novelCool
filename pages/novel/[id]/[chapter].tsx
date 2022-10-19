@@ -15,7 +15,7 @@ const ReadingView = () => {
   console.log(router, 'chapterRouter');
   useEffect(() => {
     getNovels();
-  }, [chapter, id]);
+  }, [chapter]);
 
   const getChapter = async (novel: Novel) => {
     const res = await novelService.getChapterNovel({uniqueName: chapter});

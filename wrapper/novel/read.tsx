@@ -33,14 +33,16 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
   useEffect(() => {
     setLanguageSelected(languages[0]);
     getAllChapter();
-  }, []);
+  }, [chapter]);
 
   const getAllChapter = async () => {
     try {
-      const resAll = await novelService.getChapterNovel({novelUniqueName: novel.uniqueName});
-      const allChap = resAll[0].filter((value: Chapter) => value.novel && value.novel.uniqueName === novel.uniqueName);
-      setAllChapter(allChap);
-      await getData();
+      if(novel && chapter) {
+        const resAll = await novelService.getChapterNovel({novelUniqueName: novel.uniqueName});
+        const allChap = resAll[0].filter((value: Chapter) => value.novel && value.novel.uniqueName === novel.uniqueName);
+        setAllChapter(allChap);
+        await getData();
+      }
       // if (data) {
       //   getData();
       //   // checkIsFirst(allChap);
@@ -112,10 +114,10 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
             </li>
           </ul>
           <div className="reading">
-
-            <Paragraph>
-              {data}
-            </Paragraph>
+            <div
+                contentEditable="false"
+                dangerouslySetInnerHTML={{ __html: data }}
+            />
           </div>
         </div>
       </div>

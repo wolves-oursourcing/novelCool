@@ -1,5 +1,5 @@
 export const Config = {
-  URL_API: 'http://localhost:3002/',
+  URL_API: 'https://api.anime.wildwolves.shop/',
   TOKEN: 'token',
   USER: 'user'
 };

@@ -90,6 +90,9 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
       if (user) {
         const data = JSON.parse(user);
         if (change) {
+          if(!data.bookmark) {
+            data.bookmark = [];
+          }
           data.bookmark.push(novel.id.toString());
           setChangeButton(true);
         } else {
@@ -110,8 +113,12 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
     }
     if (user) {
       const data = JSON.parse(user);
-      const bm = data.bookmark.find((value: any) => value === novel.id);
-      setChangeButton(!!bm);
+      if(data.bookmark) {
+        const bm = data.bookmark.find((value: any) => value === novel.id);
+        setChangeButton(!!bm);
+      } else {
+        setChangeButton(false);
+      }
     }
   };
   return (
