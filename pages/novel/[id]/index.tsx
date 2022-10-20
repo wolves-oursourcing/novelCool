@@ -8,7 +8,7 @@ import novelService from '../../../services/novel.service';
 const DetailNovel = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [novel, setNovel] = useState<Novel>({});
+  const [novel, setNovel] = useState<Novel>();
   const [novelsSuggest, setNovelsSuggest] = useState<Novel[]>([]);
   const { id } = router.query;
   console.log(router, 'router');
@@ -145,7 +145,7 @@ const DetailNovel = () => {
   };
   return (
     <div>
-      <DetailPageWrapper novel={novel} isLoading={isLoading} comments={comments} novelsSuggest={novelsSuggest} />
+      <DetailPageWrapper novels={novel} isLoading={isLoading} comments={comments} novelsSuggest={novelsSuggest} />
     </div>
   );
 };

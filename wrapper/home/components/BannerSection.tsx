@@ -58,13 +58,13 @@ const BannerSection = (props: IPropsBannerSection) => {
                       </div>
                       <div className="novel-content">
                         <Title level={5} className="novel-title">
-                          {novel.title}
+                          {novel.name}
                         </Title>
                         <Divider className="novel-divider" />
                         <div className="novel-footer">
                           <div className="novel-view">
                             <EyeOutlined className="icon" />
-                            <span>{novel.view}</span>
+                            <span>{novel.views}</span>
                           </div>
                         </div>
                       </div>

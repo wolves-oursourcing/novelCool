@@ -11,7 +11,7 @@ import ShowImage from "../../layout/ShowImage";
 import {patchUser} from "../../services/user.service";
 
 interface IPropsDetailPageWrapper {
-  novel: Novel;
+  novels?: Novel;
   isLoading: boolean;
   comments: Comment[];
   novelsSuggest?: Novel[];
@@ -19,9 +19,10 @@ interface IPropsDetailPageWrapper {
 const { Title, Text, Paragraph } = Typography;
 
 const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
-  const { novel, isLoading, comments, novelsSuggest } = props;
+  const { novels, isLoading, comments, novelsSuggest } = props;
   const route = useRouter();
   const [changeButton, setChangeButton] = useState(false);
+  const [novel, setNovel] = useState<Novel>({} as Novel);
   const languages: ILanguage[] = [
     {
       code: 'uk',
@@ -59,7 +60,10 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
 
   useEffect(() => {
     checkIsInLib();
-  }, [novel]);
+    if (novels) {
+      setNovel(novels)
+    }
+  }, [novels]);
 
   const menu = () => {
     return (
@@ -75,19 +79,19 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
   };
 
   const gotoChapter = () => {
-    if(novel.chapters && novel.chapters?.length > 0) {
+    if(novel && novel.chapters && novel.chapters?.length > 0) {
       route.push(`/novel/${novel.uniqueName}/${novel?.chapters[0]?.uniqueName}`)
     }
   }
 
-  const gotoRead = (uniqueName: string) => {
-    route.push(`/novel/${novel.uniqueName}/${uniqueName}`)
-  }
+  // const gotoRead = (uniqueName: string) => {
+  //   route.push(`/novel/${novel.uniqueName}/${uniqueName}`)
+  // }
 
   const addBookMark = async (change: boolean) => {
     try {
       const user = localStorage.getItem("user");
-      if (user) {
+      if (user && novel) {
         const data = JSON.parse(user);
         if (change) {
           if(!data.bookmark) {
@@ -111,7 +115,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
     if (!user) {
       setChangeButton(false);
     }
-    if (user) {
+    if (user && novel) {
       const data = JSON.parse(user);
       if(data.bookmark) {
         const bm = data.bookmark.find((value: any) => value === novel.id);
