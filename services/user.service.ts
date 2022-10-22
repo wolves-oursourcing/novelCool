@@ -66,3 +66,13 @@ export const getUserInfo = async (id: number) => {
     );
     return response;
 };
+
+export const loginSocial = async (param: any) => {
+    const response = await api.postService<IUserInfo>(
+        "auth/social/login",
+        param,
+        false,
+        false
+    );
+    return response;
+};
