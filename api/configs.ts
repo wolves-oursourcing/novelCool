@@ -1,5 +1,5 @@
 export const Config = {
-  URL_API: 'https://api.anime.wildwolves.shop/',
+  URL_API: '',
   TOKEN: 'token',
   USER: 'user',
   FACEBOOK_APP_ID: "509083557433030",
