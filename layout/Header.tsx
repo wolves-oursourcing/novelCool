@@ -3,7 +3,7 @@ import { Button, Dropdown, Input, Menu, Typography } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
 import { ILanguage } from '../utilities/variables';
 
@@ -22,12 +22,22 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
       flag: '/flags/france.svg'
     }
   ];
+  const accountSettings = ['UserName', 'My Assets', 'Bookself', 'History', 'Log out'];
 
   const [languageSelected, setLanguageSelected] = useState<ILanguage>(languages[0]);
   const [randomNovelId, setRandomNovelId] = useState(1);
+  const [user, setUser] = useState<any>();
   const onChange = (e: any) => {
     console.log(e);
   };
+
+  useEffect(() => {
+    const _user = localStorage.getItem('user');
+    if (_user) {
+      console.log('user :>> ', user);
+      setUser(JSON.parse(_user));
+    }
+  }, []);
 
   // RENDER
   const menu = () => {
@@ -44,6 +54,23 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
               >
                 <img src={language?.flag} alt="flag" />
                 <Text>{language.name}</Text>
+              </div>
+            )
+          };
+        })}
+      />
+    );
+  };
+  const menuAccountSettings = () => {
+    return (
+      <Menu
+        selectable
+        items={accountSettings.map((item, index) => {
+          return {
+            key: index + 1,
+            label: (
+              <div onClick={() => {}} className={`item-drop-language`}>
+                <Text>{item}</Text>
               </div>
             )
           };
@@ -84,11 +111,18 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
           <Input placeholder="Search" allowClear onChange={onChange} className="input-search" />
         </div>
         <div className="menu-right-item">
-          <UserOutlined className="user-icon" onClick={() => router.push('/auth/login')} />
+          {user && user.id && (
+            <Dropdown overlay={menuAccountSettings} overlayClassName="drop-lang drop-settings">
+              <div className="dropdown-value">
+                <Text>{'username'}</Text>
+              </div>
+            </Dropdown>
+          )}
+          {/* <UserOutlined className="user-icon" onClick={() => router.push('/auth/login')} /> */}
         </div>
         <div className="menu-right-item dropdown">
           <Dropdown overlay={menu} overlayClassName="drop-lang">
-            <div className="dropdown-value">
+            <div className="dropdown-value img-only">
               <img src={languageSelected?.flag} alt="flag" />
             </div>
           </Dropdown>
