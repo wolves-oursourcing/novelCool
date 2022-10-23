@@ -39,21 +39,26 @@ const LoginWrapper = () => {
       console.log(e);
     }
   };
+
   const responseGoogle = async (response: any) => {
-    const newRes = {
-      email: response.profileObj.email,
-      first_name: response.profileObj.familyName,
-      last_name: response.profileObj.givenName,
-      id: response.googleId,
-      provider: 'google'
-    };
-    console.log(response);
-    const res = await loginSocial(newRes);
-    const accessToken = res.access_token ? res.access_token : '';
-    localStorage.setItem(Config.TOKEN, accessToken);
-    const userInfo = await getUserInfo(res.userId ? res.userId : 0);
-    localStorage.setItem(Config.USER, JSON.stringify(userInfo));
-    Router.push('/');
+    try{
+      const newRes = {
+        email: response.profileObj.email,
+        first_name: response.profileObj.familyName,
+        last_name: response.profileObj.givenName,
+        id: response.googleId,
+        provider: 'google'
+      };
+      console.log(response);
+      const res = await loginSocial(newRes);
+      const accessToken = res.access_token ? res.access_token : '';
+      localStorage.setItem(Config.TOKEN, accessToken);
+      const userInfo = await getUserInfo(res.userId ? res.userId : 0);
+      localStorage.setItem(Config.USER, JSON.stringify(userInfo));
+      Router.push('/');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
