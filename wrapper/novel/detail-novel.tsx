@@ -8,7 +8,8 @@ import ChapterView from './chapters';
 import CommentView from './comments';
 import {useRouter} from "next/router";
 import ShowImage from "../../layout/ShowImage";
-import {patchUser} from "../../services/user.service";
+import {getUserInfo, patchUser} from "../../services/user.service";
+import {Config, KeyConfigLocal} from "../../api/configs";
 
 interface IPropsDetailPageWrapper {
   novels?: Novel;
@@ -59,9 +60,9 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
   };
 
   useEffect(() => {
-    checkIsInLib();
     if (novels) {
       setNovel(novels)
+      checkIsInLib();
     }
   }, [novels]);
 
@@ -90,7 +91,8 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
 
   const addBookMark = async (change: boolean) => {
     try {
-      const user = localStorage.getItem("user");
+      const user = localStorage.getItem(KeyConfigLocal.USER);
+      console.log(user);
       if (user && novel) {
         const data = JSON.parse(user);
         if (change) {
@@ -104,7 +106,13 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
           setChangeButton(false);
         }
         console.log(data.bookmark);
-        const res = await patchUser(data.id, { bookmark: data.bookmark });
+        const res: any = await patchUser(data.id, { bookmark: data.bookmark });
+        const userInfo = await getUserInfo(res.id ? res.id : 0);
+        console.log(res);
+        localStorage.setItem(Config.USER, JSON.stringify(userInfo));
+        // localStorage.setItem(KeyConfigLocal.USER, )
+      } else {
+        alert('You need Login');
       }
     } catch (e) {
     }
@@ -115,10 +123,10 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
     if (!user) {
       setChangeButton(false);
     }
-    if (user && novel) {
+    if (user && novels) {
       const data = JSON.parse(user);
       if(data.bookmark) {
-        const bm = data.bookmark.find((value: any) => value === novel.id);
+        const bm = data.bookmark.find((value: any) => value === novels.id.toString());
         setChangeButton(!!bm);
       } else {
         setChangeButton(false);

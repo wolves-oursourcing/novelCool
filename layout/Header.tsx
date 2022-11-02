@@ -123,9 +123,14 @@ const Header: FC<{ isScroll: boolean }> = ({isScroll}) => {
                     {user && user.id && (
                         <Dropdown overlay={menuAccountSettings} overlayClassName="drop-lang drop-settings">
                             <div className="dropdown-value">
-                                <Text>{'username'}</Text>
+                                <Text>{user.username}</Text>
                             </div>
                         </Dropdown>
+                    )}
+                    {!user && (
+                            <div onClick={() => Router.push('/auth/login')} className="dropdown-value">
+                                <Text>Login</Text>
+                            </div>
                     )}
                     {/* <UserOutlined className="user-icon" onClick={() => router.push('/auth/login')} /> */}
                 </div>
