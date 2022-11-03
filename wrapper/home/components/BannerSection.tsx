@@ -9,14 +9,15 @@ interface IPropsBannerSection {
   title?: string;
 }
 const { Title } = Typography;
-const settings = {
-  dots: { className: 'custom-dots' },
-  infinite: false,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1
-};
+
 const BannerSection = (props: IPropsBannerSection) => {
+  const [settings, setSettings] = useState<any>({
+    dots: { className: 'custom-dots' },
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1
+  });
   const { novels, title } = props;
   const [novelHovered, setNovelHovered] = useState<Novel>();
   const router = useRouter();
@@ -25,6 +26,18 @@ const BannerSection = (props: IPropsBannerSection) => {
       setNovelHovered(novels[0]);
     }
   }, [novels]);
+
+  useEffect(() => {
+    if (window) {
+      console.log('window.hei :>> ', window.outerWidth <= 425);
+      if (window.outerWidth <= 425) {
+        setSettings({ ...settings, slidesToShow: 2 });
+      } else if (window.outerWidth <= 768) {
+        console.log('hihi');
+        setSettings({ ...settings, slidesToShow: 3 });
+      }
+    }
+  }, [typeof window]);
 
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
