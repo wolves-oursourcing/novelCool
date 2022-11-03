@@ -1,20 +1,19 @@
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
-import {signUp} from "../../services/user.service";
-import Router from "next/router";
+import { signUp } from '../../services/user.service';
+import Router from 'next/router';
 const { Title, Text } = Typography;
 const RegisterWrapper = () => {
   const onFinish = async (value: any) => {
-    console.log('Success:', value);
     try {
       const user = await signUp({
         username: value.username,
         email: value.email,
         password: value.password,
-        passwordConfirm: value.confirmPassword
+        passwordConfirm: value.passwordConfirm
       });
       console.log(user);
-      Router.push('/login')
+      Router.push('/login');
     } catch (e) {
       console.log(e);
     }
@@ -51,7 +50,7 @@ const RegisterWrapper = () => {
             />
           </Form.Item>
           <Form.Item
-            name="confirm"
+            name="passwordConfirm"
             dependencies={['password']}
             hasFeedback
             rules={[
@@ -71,7 +70,7 @@ const RegisterWrapper = () => {
           >
             <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
           </Form.Item>
-          <Form.Item name="name" rules={[{ required: false }]}>
+          <Form.Item name="username" rules={[{ required: false }]}>
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Name"

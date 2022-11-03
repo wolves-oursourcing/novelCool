@@ -47,7 +47,10 @@
     display: flex;
     align-items: center;
     .menu-right-item{
-      margin-right: .75rem;
+      margin-right: 1rem;
+      &.auth {
+        margin-right: 2rem;
+      }
     }
     .btn-upload {
       background-color: var(--color-primary);
@@ -79,7 +82,7 @@
       }
     }
     .user-icon {
-      font-size: 18px;
+      font-size: 22px;
       cursor: pointer;
     }
     .dropdown-value {
