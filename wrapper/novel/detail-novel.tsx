@@ -10,6 +10,7 @@ import {useRouter} from "next/router";
 import ShowImage from "../../layout/ShowImage";
 import {getUserInfo, patchUser} from "../../services/user.service";
 import {Config, KeyConfigLocal} from "../../api/configs";
+import {getChapterNovel} from "../../services/comment.services";
 
 interface IPropsDetailPageWrapper {
   novels?: Novel;
@@ -24,6 +25,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
   const route = useRouter();
   const [changeButton, setChangeButton] = useState(false);
   const [novel, setNovel] = useState<Novel>({} as Novel);
+  const [comment, setComment] = useState([]);
   const languages: ILanguage[] = [
     {
       code: 'uk',
@@ -62,6 +64,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
   useEffect(() => {
     if (novels) {
       setNovel(novels)
+      getComment();
       checkIsInLib();
     }
   }, [novels]);
@@ -133,6 +136,17 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
       }
     }
   };
+
+  const getComment = async () => {
+    try{
+      const res = await getChapterNovel({novelId: novels.id});
+      setComment(res[0]);
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+
   return (
     <div className="novel-detail-page container">
       <div className="detail-page-head">
@@ -236,7 +250,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
           {
             label: `Comments`,
             key: '1',
-            children: <CommentView comments={comments} />
+            children: <CommentView comments={comment} onSubmited={getComment} novel={novels} />
           },
           {
             label: `Chapters`,

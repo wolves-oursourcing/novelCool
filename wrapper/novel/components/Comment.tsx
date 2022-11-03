@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Comment } from './../../../api/comment';
 
 interface IPropsCommentItem {
-  comment: Comment;
+  comment: any;
 }
 const { Title, Text, Paragraph } = Typography;
 const CommentItem = (props: IPropsCommentItem) => {
@@ -27,13 +27,13 @@ const CommentItem = (props: IPropsCommentItem) => {
             </div>
           ))}
         </div>
-        <Paragraph>{comment?.message}</Paragraph>
+        <Paragraph>{comment?.content}</Paragraph>
         <div className="comment-actions">
           <Text className="timer">{moment(comment.createdAt).format('MMM DD, YYYY')}</Text>
-          <div className="actions">
-            <CommentOutlined className="icon me-3" />
-            <LikeFilled className="icon" />
-          </div>
+          {/*<div className="actions">*/}
+          {/*  <CommentOutlined className="icon me-3" />*/}
+          {/*  <LikeFilled className="icon" />*/}
+          {/*</div>*/}
         </div>
       </div>
     </div>

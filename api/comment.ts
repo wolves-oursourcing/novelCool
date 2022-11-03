@@ -1,6 +1,6 @@
 export interface Comment {
   id?: number;
-  message?: string;
+  content?: string;
   timer?: string;
   likes?: number;
   user?: any;

@@ -4,19 +4,41 @@ import { range } from 'lodash';
 import { useState } from 'react';
 import { Comment } from '../../api/comment';
 import CommentItem from './components/Comment';
+import {createComment, getChapterNovel} from "../../services/comment.services";
+import {KeyConfigLocal} from "../../api/configs";
+import {Novel} from "../../services/novel.service";
 
 interface IPropsComment {
-  comments?: Comment[];
+  comments?: any[];
+  novel?: Novel;
+  onSubmited?: any;
 }
 
 const { Title, Text, Paragraph } = Typography;
 const { TextArea } = Input;
 const CommentView = (props: IPropsComment) => {
-  const { comments } = props;
+  const { comments, novel, onSubmited } = props;
   const [comment, setComment] = useState<Comment>();
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    const user = localStorage.getItem(KeyConfigLocal.USER);
+    console.log(user);
+    if (user && novel && comment) {
+      const data = JSON.parse(user);
+      const dataSend = {
+        "content": comment.content,
+        "userId": data.id,
+        "novelId": novel.id,
+        "parentId": null,
+        "rate": comment.rate
+      }
+      await createComment(dataSend);
+      onSubmited();
+      setComment({content: '', rate: 1});
+    }
     console.log('comment', comment);
   };
+
+
   return (
     <div className="comments-view">
       <Title level={4}>{comments && comments.length} Comments</Title>
@@ -37,15 +59,15 @@ const CommentView = (props: IPropsComment) => {
           <TextArea
             placeholder="Write down your comments here"
             rows={10}
-            value={comment?.message}
-            onChange={e => setComment({ ...comment, message: e.target.value })}
+            value={comment?.content}
+            onChange={e => setComment({ ...comment, content: e.target.value })}
           ></TextArea>
-          <Upload action="/upload.do" listType="picture-card" className="upload">
-            <div>
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          </Upload>
+          {/*<Upload action="/upload.do" listType="picture-card" className="upload">*/}
+          {/*  <div>*/}
+          {/*    <PlusOutlined />*/}
+          {/*    <div style={{ marginTop: 8 }}>Upload</div>*/}
+          {/*  </div>*/}
+          {/*</Upload>*/}
         </div>
         <Button className="btn-common primary btn-submit" onClick={onSubmit}>
           Submit
