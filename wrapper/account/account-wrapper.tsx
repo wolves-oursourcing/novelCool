@@ -21,7 +21,7 @@ const AccountPageWrapper = (props: IPropsAccountWrapper) => {
   const accountSettings: AccountSettingInterface[] = [
     {
       name: 'Setting',
-      component: <SettingComponent />
+      component: <SettingComponent user={user} />
     },
     {
       name: 'Notification',
@@ -38,7 +38,7 @@ const AccountPageWrapper = (props: IPropsAccountWrapper) => {
   const { tab } = router.query;
   useEffect(() => {
     initalize();
-  }, [tab]);
+  }, [tab, user]);
   const initalize = () => {
     if (tab) {
       const selected = accountSettings.find(item => item.name === tab);

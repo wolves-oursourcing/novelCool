@@ -147,7 +147,7 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
           {user && user.id ? (
             <Dropdown overlay={menuAccountSettings} overlayClassName="drop-lang drop-settings">
               <div className="dropdown-value">
-                <Text>{user.firstName + ' ' + user.lastName}</Text>
+                <Text>{user.username}</Text>
               </div>
             </Dropdown>
           ) : (

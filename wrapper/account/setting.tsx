@@ -1,10 +1,22 @@
 import { KeyOutlined, LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Typography } from 'antd';
+import {useEffect} from "react";
+import {IUserInfo} from "../../services/user.service";
 
-export interface IPropsSettingComponent {}
+export interface IPropsSettingComponent {
+  user?: IUserInfo;
+}
 
 const SettingComponent = (props: IPropsSettingComponent) => {
+  const { user } = props;
   const { Title } = Typography;
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue({
+      ...user
+    })
+  }, [user])
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
@@ -15,6 +27,7 @@ const SettingComponent = (props: IPropsSettingComponent) => {
     <div className="setting-component">
       <Title level={2}>Setting</Title>
       <Form
+          form={form}
         layout="vertical"
         name="basic"
         initialValues={{ remember: true }}
