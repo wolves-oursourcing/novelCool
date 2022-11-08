@@ -59,7 +59,7 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
     const current = allChap.indexOf(allChap.find(value => value.uniqueName === chapter.uniqueName));
     if (current >= 0) {
       const valueNext = allChap[current + 1];
-      Router.push(`/novels/${novel.uniqueName}/${valueNext.uniqueName}`);
+      Router.push(`/novel/${novel.uniqueName}/${valueNext.uniqueName}`);
     }
   };
 
@@ -69,7 +69,7 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
     const current = allChap.indexOf(allChap.find(value => value.uniqueName === chapter.uniqueName));
     if (current > 0) {
       const valueNext = allChap[current - 1];
-      Router.push(`/novels/${novel.uniqueName}/${valueNext.uniqueName}`);
+      Router.push(`/novel/${novel.uniqueName}/${valueNext.uniqueName}`);
     }
   };
 
