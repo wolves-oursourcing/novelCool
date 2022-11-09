@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import {Chapter, Novel} from '../../services/novel.service';
 import novelService from '../../services/novel.service';
+import ReactLoading from "react-loading";
 interface IPropsChapter {
   novel: Novel;
 }
@@ -17,17 +18,25 @@ const ChapterView = (props: IPropsChapter) => {
   const [continueReading, setContinueReading] = useState<boolean>(false);
   const [selectedChapter, setSelectedChapter] = useState<Chapter>();
   const [chapters, setChapters] = useState<Chapter[]>([]);
+  const [loading, setLoading] = useState(true);
   const route = useRouter();
   useEffect(() => {
     getChapterOfNovel();
   }, [novel]);
 
   const getChapterOfNovel = async () => {
-    const res = await novelService.getChapterNovel({novelUniqueName: novel.uniqueName});
-    if (res[0] && res[0].length > 0) {
-      setSelectedChapter(res[0][0]);
+    try {
+      setLoading(true);
+      const res = await novelService.getChapterNovel({novelUniqueName: novel.uniqueName});
+      if (res[0] && res[0].length > 0) {
+        setSelectedChapter(res[0][0]);
+      }
+      setChapters(res[0]);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
     }
-    setChapters(res[0]);
   }
 
   const gotoRead = (uniqueName: string) => {
@@ -35,6 +44,9 @@ const ChapterView = (props: IPropsChapter) => {
   }
   return (
     <div className="chapter-view">
+      {loading && ( <div className="loading">
+        <ReactLoading type={"spin"} color="#fff"/>
+      </div>)}
       <ul className="list-chapter">
         <li className="item-chapter">
           <div className="left">

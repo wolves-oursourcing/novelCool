@@ -18,6 +18,7 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
   const [drama, setDrama] = useState<Novel[]>();
   const [fantasy, setFantasy] = useState<Novel[]>();
   const [comedy, setComedy] = useState<Novel[]>();
+    const [loading, setLoading] = useState(true);
   const scrollRef = useRef();
   const router = useRouter();
   const query = router.query;
@@ -39,9 +40,7 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
 
     useEffect(() => {
         try {
-            getLastest();
-            getComplete();
-            getPopular();
+            getData();
         } catch (e) {
             console.log(e);
         }
@@ -78,6 +77,18 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
         setPopular(popular[0]);
     }
 
+    const getData = async () => {
+        try{
+            setLoading(true);
+            await Promise.all([getLastest(),
+                getComplete(),
+                getPopular()]);
+            setLoading(false);
+        }catch (e) {
+            console.log(e);
+            setLoading(false);
+        }
+    }
 
   return (
     <>

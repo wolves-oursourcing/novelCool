@@ -7,6 +7,9 @@ import AsideActions from './components/AsideActions';
 import {Config} from "../../api/configs";
 import novelService, {Chapter, Novel} from "../../services/novel.service";
 import Router from "next/router";
+import ReactLoading from 'react-loading';
+import {Simulate} from "react-dom/test-utils";
+import load = Simulate.load;
 
 interface IPropsReadingPage {
   chapter: Chapter;
@@ -33,6 +36,7 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
   const [allChapter, setAllChapter] = useState<any>([]);
   const [isFirst, setIsFirst] = useState(false);
   const [isLast, setIsLast] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLanguageSelected(languages[0]);
     getAllChapter();
@@ -41,15 +45,18 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
   const getAllChapter = async () => {
     try {
       if(novel && chapter) {
+        setLoading(true);
         const resAll = await novelService.getChapterNovel({novelUniqueName: novel.uniqueName});
         const allChap = resAll[0].filter((value: Chapter) => value.novel && value.novel.uniqueName === novel.uniqueName);
         setAllChapter(allChap);
         await getData();
         checkIsFirst(allChap);
         checkIsLast(allChap);
+        setLoading(false);
       }
     } catch (e) {
       console.log(e);
+      setLoading(false);
     }
   };
 
@@ -144,11 +151,25 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
             </li>)}
           </ul>
           <div className="reading">
+            {loading && ( <div className="loading">
+              <ReactLoading type={"spin"} color="#fff"/>
+            </div>)}
             <div
                 contentEditable="false"
                 dangerouslySetInnerHTML={{ __html: data }}
             />
           </div>
+          <ul style={{ marginTop: '8px' }} className="reading-pagination">
+            {!isFirst &&(<li onClick={() => prev()} className="reading-pagination-item">
+              <DoubleLeftOutlined/>
+              <Text className="ms-1">Previous</Text>
+            </li>)}
+            <li className="pagination-divider"></li>
+            {!isLast &&(<li onClick={() => next()} className="reading-pagination-item">
+              <Text className="me-1">Next</Text>
+              <DoubleRightOutlined/>
+            </li>)}
+          </ul>
         </div>
       </div>
       <Footer />

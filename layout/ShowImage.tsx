@@ -21,7 +21,7 @@ const ShowImage = ({
     : isAvatar
     ? AVATAR_DEFAULT
     : IMAGE_DEFAULT;
-  return <img className={className} src={urlImage} alt={alt? alt : 'cover'} />;
+  return <img className={className} src={urlImage} alt={alt? alt : 'cover'} loading="lazy" />;
 };
 
 export default ShowImage;

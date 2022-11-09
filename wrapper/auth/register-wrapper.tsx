@@ -13,7 +13,7 @@ const RegisterWrapper = () => {
         passwordConfirm: value.passwordConfirm
       });
       console.log(user);
-      Router.push('/login');
+      Router.push('/auth/login');
     } catch (e) {
       console.log(e);
     }
