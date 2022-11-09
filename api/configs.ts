@@ -1,11 +1,12 @@
 export const Config = {
   URL_API: 'https://api.anime.wildwolves.shop/',
+  // URL_API: 'http://localhost:3002/',
   TOKEN: 'token',
   USER: 'user',
   FACEBOOK_APP_ID: "658430965696356",
   GOOGLE_CLIENT_ID:
-      "498077768323-68muh0dflbj8c877e44am51tpvs3deup.apps.googleusercontent.com",
-  CLIENT_SECRET: "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",
+      "498077768323-gb1slr9b4k64o8vse1ds3p0q4979439s.apps.googleusercontent.com",
+  CLIENT_SECRET: "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",
 };
 
 export const RESPONSE_STATUS = {
