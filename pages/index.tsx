@@ -3,7 +3,6 @@ import withAppProvider from '../hoc/withAppProvider';
 import { Novel } from '../services/novel.service';
 import HomeWrapper from '../wrapper/home';
 
-
 const HomePage = () => {
   const [novels, setNovels] = useState<Novel[]>([]);
   useEffect(() => {
