@@ -93,7 +93,7 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
 
   return (
     <>
-      <BannerSection novels={novels} />
+      <BannerSection novels={popular} />
       <NovelsSection novels={lastest} title="Latest" isGray={true} />
       <NovelsSection novels={popular} title="Popular" />
       <NovelsSection novels={complete} title="Completed" isGray={true} />

@@ -3,6 +3,7 @@ import { Carousel, Divider, Row, Typography } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Novel } from '../../../services/novel.service';
+import ShowImage from "../../../layout/ShowImage";
 
 interface IPropsBannerSection {
   novels?: Novel[];
@@ -42,6 +43,12 @@ const BannerSection = (props: IPropsBannerSection) => {
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
+
+  const gotoDetail = (id?: string) => {
+    console.log(id);
+    router.push(`/novel/${id}`)
+  }
+
   return (
     <>
       <div className="banner-section-wrapper">
@@ -54,9 +61,9 @@ const BannerSection = (props: IPropsBannerSection) => {
               <Carousel {...settings} afterChange={onChange} className="w-100">
                 {novels.map(novel => (
                   <div className="wrap-novel" key={novel.id} onMouseEnter={() => setNovelHovered(novel)}>
-                    <div onClick={() => router.push(`/novel/${novel.id}`)} className="novel">
+                    <div  onClick={() => gotoDetail(novel.uniqueName)} className="novel">
                       <div className="novel-image">
-                        <img src={novel.image} alt="image" />
+                        <ShowImage image={novel.image} container="images" />
                         <div className="novel-rate">{novel.rate}</div>
                         <div className="overlay">
                           <Title level={5} className="novel-title">
@@ -64,7 +71,7 @@ const BannerSection = (props: IPropsBannerSection) => {
                           </Title>
                           <Divider className="novel-divider" />
                           <p className="novel-brief">{novel.description}</p>
-                          <a href="" className="more-detail">
+                          <a  onClick={() => gotoDetail(novel.uniqueName)} className="more-detail">
                             More detail
                           </a>
                         </div>

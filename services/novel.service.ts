@@ -50,6 +50,15 @@ const getAllNovel = async (filter?: any) => {
   );
   return response;
 };
+
+ const updateNovel = async (novel: Novel) => {
+     const response = await api.patchService(
+         `novel/${novel.id}`,
+         novel
+     );
+     return response;
+ }
+
  const getNovelByRank = async () => {
   const response = await api.getService<any>(
       "novel/getByRanking"
@@ -82,4 +91,4 @@ const getChapterNovel = async (filter?: any) => {
     return response;
 };
 
-export default { getBlogs, getDetailBlog, createNovel, getWeeklyMostActive, getById, getNovelByRank, getAllNovel, getChapterNovel };
+export default { getBlogs, getDetailBlog, createNovel, getWeeklyMostActive, getById, getNovelByRank, getAllNovel, getChapterNovel, updateNovel };

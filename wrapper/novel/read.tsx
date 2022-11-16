@@ -40,6 +40,7 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
   useEffect(() => {
     setLanguageSelected(languages[0]);
     getAllChapter();
+    updateView();
   }, [chapter]);
 
   const getAllChapter = async () => {
@@ -59,6 +60,15 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
       setLoading(false);
     }
   };
+
+  const updateView = async () => {
+    try {
+      novel.views += 1;
+      await novelService.updateNovel(novel);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   const next = async () => {
     const resAll = await novelService.getChapterNovel({novelUniqueName: novel.uniqueName});
