@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { Novel } from '../../../services/novel.service';
 import { NovelKind } from '../../../utilities/variables';
-import ShowImage from "../../../layout/ShowImage";
+import ShowImage from '../../../layout/ShowImage';
 
 export enum DisplayType {
   NORMAL = 'NORMAL',
@@ -27,14 +27,14 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
 
   const gotoDetail = (id?: string) => {
     console.log(id);
-    router.push(`/novel/${id}`)
-  }
+    router.push(`/novel/${id}`);
+  };
 
   const tags = ['Romance', 'Drama', 'School life']; // for demo
   return (
     <div className="novel">
       <div className="novel-image" onClick={() => router.push(`/novel/${novel.uniqueName}`)}>
-        <ShowImage image={novel.image} container="images" />
+        <ShowImage image={novel?.image} container="images" />
         {isShowRate && <div className="novel-rate">{novel.rate}</div>}
         {isShowKind && (
           <div className={`novel-kind ${novel.kind === NovelKind.MANGA ? 'blue' : ''}`}>
@@ -56,7 +56,7 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
             Summary
           </Title>
           <Divider className="novel-divider" />
-          <p className="novel-brief">{novel.description}</p>
+          <p className="novel-brief">{novel?.description}</p>
           <a href="" className="more-detail">
             More detail
           </a>
@@ -64,10 +64,10 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
       </div>
       <div onClick={() => gotoDetail(novel.uniqueName)} className="novel-content">
         <Title level={5} className="novel-title">
-          {novel.name}
+          {novel?.name}
         </Title>
         <div className="novel-vote">
-          <span className="novel-vote-number">{novel.vote}</span>
+          <span className="novel-vote-number">{novel?.vote}</span>
           <div className="list-star">
             {range(0, 5).map(star => (
               <div className="star" key={star}>
@@ -77,10 +77,10 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
                   className="star-active"
                   style={{
                     width: `${
-                      Math.floor(novel.vote || 0) - star > 0
+                      Math.floor(novel?.vote || 0) - star > 0
                         ? 100
-                        : Math.floor(novel.vote || 0) - star > -1
-                        ? ((novel.vote || 0) - Math.floor(novel.vote || 0)) * 100
+                        : Math.floor(novel?.vote || 0) - star > -1
+                        ? ((novel?.vote || 0) - Math.floor(novel?.vote || 0)) * 100
                         : 0
                     }%`
                   }}
@@ -106,9 +106,9 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
             <>
               <div className="novel-view">
                 <EyeOutlined className="icon" />
-                <span>{novel.views}</span>
+                <span>{novel?.views}</span>
               </div>
-              <div className="novel-timer">{moment(novel.createdAt).format('MMM DD, YYYY')}</div>
+              <div className="novel-timer">{moment(novel?.createdAt).format('MMM DD, YYYY')}</div>
             </>
           )}
         </div>

@@ -3,7 +3,8 @@ import { Carousel, Divider, Row, Typography } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Novel } from '../../../services/novel.service';
-import ShowImage from "../../../layout/ShowImage";
+import ShowImage from '../../../layout/ShowImage';
+import { Config } from '../../../api/configs';
 
 interface IPropsBannerSection {
   novels?: Novel[];
@@ -46,22 +47,25 @@ const BannerSection = (props: IPropsBannerSection) => {
 
   const gotoDetail = (id?: string) => {
     console.log(id);
-    router.push(`/novel/${id}`)
-  }
+    router.push(`/novel/${id}`);
+  };
 
   return (
     <>
       <div className="banner-section-wrapper">
         <div className="wrap-banner">
           <div className="banner">
-            <div className="banner-image" style={{ backgroundImage: `url(${novelHovered?.image})` }}></div>
+            <div
+              className="banner-image"
+              style={{ backgroundImage: `url(${Config.URL_API}files/download/images?file=${novelHovered?.image})` }}
+            ></div>
           </div>
           <Row className="wrap-carousel">
             {novels && novels.length > 0 && (
               <Carousel {...settings} afterChange={onChange} className="w-100">
                 {novels.map(novel => (
                   <div className="wrap-novel" key={novel.id} onMouseEnter={() => setNovelHovered(novel)}>
-                    <div  onClick={() => gotoDetail(novel.uniqueName)} className="novel">
+                    <div onClick={() => gotoDetail(novel.uniqueName)} className="novel">
                       <div className="novel-image">
                         <ShowImage image={novel.image} container="images" />
                         <div className="novel-rate">{novel.rate}</div>
@@ -71,7 +75,7 @@ const BannerSection = (props: IPropsBannerSection) => {
                           </Title>
                           <Divider className="novel-divider" />
                           <p className="novel-brief">{novel.description}</p>
-                          <a  onClick={() => gotoDetail(novel.uniqueName)} className="more-detail">
+                          <a onClick={() => gotoDetail(novel.uniqueName)} className="more-detail">
                             More detail
                           </a>
                         </div>

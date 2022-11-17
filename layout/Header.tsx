@@ -1,14 +1,16 @@
-import { CloudUploadOutlined, UserOutlined } from '@ant-design/icons';
+import { CloudUploadOutlined, EyeOutlined, StarFilled, StarOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Input, Menu, Typography } from 'antd';
-import { get } from 'lodash';
+import { get, range } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
+import { Novel } from '../services/novel.service';
 import { URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
 import { ILanguage } from '../utilities/variables';
+import NovelView from '../wrapper/home/components/Novel';
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   const router = useRouter();
   const languages: ILanguage[] = [
@@ -37,8 +39,33 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   const [languageSelected, setLanguageSelected] = useState<ILanguage>(languages[0]);
   const [randomNovelId, setRandomNovelId] = useState(1);
   const [user, setUser] = useState<any>();
-  const onChange = (e: any) => {
-    console.log(e);
+  const [novelsSearch, setNovelSearch] = useState<Novel[]>([]);
+  const [isFocus, setIsFocus] = useState(false);
+  const search = value => {
+    console.log(value);
+    router.push(`/search?search=${value}`);
+  };
+
+  const handleChangeSearch = e => {
+    console.log('e.target.value :>> ', e.target.value);
+    setIsFocus(true);
+    setNovelSearch([
+      {
+        id: 1,
+        image: '/img/banner_test.jpg',
+        name: 'Super Detective In The Fictional World',
+        description: 'Super Detective In The Fictional World',
+        rate: 4.0,
+        vote: 4,
+        views: 2610,
+        kind: 'Novel',
+        createdAt: new Date()
+      }
+    ]);
+  };
+
+  const handleBlur = e => {
+    setIsFocus(false);
   };
 
   useEffect(() => {
@@ -140,8 +167,62 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
         <Button className="btn-upload menu-right-item" onClick={() => router.push('/')}>
           <CloudUploadOutlined />
         </Button>
-        <div className="search menu-right-item">
-          <Input placeholder="Search" allowClear onChange={onChange} className="input-search" />
+        <div className={`search menu-right-item ${isFocus && novelsSearch.length > 0 ? 'active' : 0}`}>
+          <Input.Search
+            placeholder="Search"
+            allowClear
+            onChange={handleChangeSearch}
+            onBlur={handleBlur}
+            onSearch={search}
+            className="input-search"
+          />
+          {novelsSearch && novelsSearch.length > 0 && (
+            <div className="menu-search">
+              <div className="item-search">
+                {/* <NovelView novel={novelsSearch[0]} /> */}
+                {novelsSearch.map(novel => (
+                  <div className="novel-search">
+                    <div className="left">
+                      <img src={novel?.image} alt="image" />
+                    </div>
+                    <div className="right">
+                      <Title level={5} ellipsis={true} className="novel-title">
+                        {novel?.name}
+                      </Title>
+                      <div className="novel-vote">
+                        <span className="novel-vote-number">{novel?.vote}</span>
+                        <div className="list-star">
+                          {range(0, 5).map(star => (
+                            <div className="star" key={star}>
+                              <StarOutlined />
+                              <StarFilled
+                                key={star}
+                                className="star-active"
+                                style={{
+                                  width: `${
+                                    Math.floor(novel?.vote || 0) - star > 0
+                                      ? 100
+                                      : Math.floor(novel?.vote || 0) - star > -1
+                                      ? ((novel?.vote || 0) - Math.floor(novel?.vote || 0)) * 100
+                                      : 0
+                                  }%`
+                                }}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <Text className="novel-description">{novel?.description}</Text>
+                      <div className="novel-view">
+                        <EyeOutlined className="icon" />
+                        <span>{novel?.views}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
         <div className="menu-right-item auth">
           {user && user.id ? (

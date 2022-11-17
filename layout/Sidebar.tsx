@@ -1,12 +1,20 @@
-import { CloseOutlined } from '@ant-design/icons';
-import { Button, Drawer } from 'antd';
+import { CloseOutlined, EyeOutlined, SearchOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
+import { Button, Drawer, Input, InputRef, Typography } from 'antd';
+import { range } from 'lodash';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
+import { Novel } from '../services/novel.service';
 import { URL_APP, URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
 
 const SideBar: FC<{}> = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [novelsSearch, setNovelSearch] = useState<Novel[]>([]);
+  const inputRef = useRef<InputRef>(null);
+
+  const { Text, Title } = Typography;
+
   const toggleSideBar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -18,6 +26,27 @@ const SideBar: FC<{}> = () => {
       </Button>
     </div>
   );
+  const search = value => {
+    console.log(value);
+    router.push(`/search?search=${value}`);
+  };
+
+  const handleChangeSearch = e => {
+    console.log('e.target.value :>> ', e.target.value);
+    setNovelSearch([
+      {
+        id: 1,
+        image: '/img/banner_test.jpg',
+        name: 'Super Detective In The Fictional World',
+        description: 'Super Detective In The Fictional World',
+        rate: 4.0,
+        vote: 4,
+        views: 2610,
+        kind: 'Novel',
+        createdAt: new Date()
+      }
+    ]);
+  };
 
   return (
     <div className="sidebar">
@@ -28,6 +57,24 @@ const SideBar: FC<{}> = () => {
           <span></span>
         </div>
       </button>
+      <div className={`search ${showSearch ? 'active' : ''}`}>
+        <Input allowClear onChange={handleChangeSearch} className="input-search" onPressEnter={search} ref={inputRef} />
+        {!showSearch ? (
+          <SearchOutlined
+            className="icon"
+            onClick={() => {
+              setShowSearch(true);
+              setTimeout(() => {
+                inputRef.current!.focus({
+                  cursor: 'end'
+                });
+              }, 100);
+            }}
+          />
+        ) : (
+          <CloseOutlined className="icon" onClick={() => setShowSearch(false)} />
+        )}
+      </div>
       <div className="logo">
         <a href="/">
           <Image src="/img/sirrista-logo.png" alt="logo" width={86} height={50} />
@@ -80,6 +127,54 @@ const SideBar: FC<{}> = () => {
           </p>
         </div>
       </Drawer>
+
+      {showSearch && novelsSearch && novelsSearch.length > 0 && (
+        <div className={`menu-search ${showSearch && novelsSearch && novelsSearch.length > 0 ? 'active' : ''}`}>
+          <div className="item-search">
+            {/* <NovelView novel={novelsSearch[0]} /> */}
+            {novelsSearch.map(novel => (
+              <div className="novel-search">
+                <div className="left">
+                  <img src={novel?.image} alt="image" />
+                </div>
+                <div className="right">
+                  <Title level={5} ellipsis={true} className="novel-title">
+                    {novel?.name}
+                  </Title>
+                  <div className="novel-vote">
+                    <span className="novel-vote-number">{novel?.vote}</span>
+                    <div className="list-star">
+                      {range(0, 5).map(star => (
+                        <div className="star" key={star}>
+                          <StarOutlined />
+                          <StarFilled
+                            key={star}
+                            className="star-active"
+                            style={{
+                              width: `${
+                                Math.floor(novel?.vote || 0) - star > 0
+                                  ? 100
+                                  : Math.floor(novel?.vote || 0) - star > -1
+                                  ? ((novel?.vote || 0) - Math.floor(novel?.vote || 0)) * 100
+                                  : 0
+                              }%`
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <Text className="novel-description">{novel?.description}</Text>
+                  <div className="novel-view">
+                    <EyeOutlined className="icon" />
+                    <span>{novel?.views}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
