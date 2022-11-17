@@ -7,7 +7,7 @@ const Footer: FC = () => {
     <>
       <div className="footer">
         <Row className="container">
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <div className="d-flex flex-column align-items-center">
               <ul className="ps-0 mb-0 d-flex">
                 <li className="d-flex px-4">
@@ -30,7 +30,7 @@ const Footer: FC = () => {
               </ul>
             </div>
           </Col>
-          <Col span={12} className="d-flex justify-content-center align-items-end">
+          <Col xs={24} md={12} className="d-flex justify-content-center align-items-end">
             <div className="copyright">
               <CopyrightCircleOutlined />
               2018 NovelCool.com
