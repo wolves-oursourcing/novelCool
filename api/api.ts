@@ -37,7 +37,7 @@ const postService = async <T>(url: string, body: object, isAuthorization = true,
     return await _responseConfig(response);
   } catch (error: any) {
     console.log(error);
-    // showToast(error.message, "error");
+    //showToast(error.message, "error");
     throw error;
   }
 };

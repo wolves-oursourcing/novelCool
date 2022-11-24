@@ -7,7 +7,7 @@ const DefaultLayout: FC<{ children?: any }> = ({ children }) => {
       <Head>
         <meta name="robots" content="noindex, nofollow" />
           {/*<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />*/}
-        <title>Novel Cool</title>
+        <title>Latest Novels</title>
         <meta name="description" content="For reading novel" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
