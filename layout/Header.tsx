@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { Novel } from '../services/novel.service';
-import { URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
+import {URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_REVIEW, URL_ROOT, URL_SURPRISE} from '../utilities/URL';
 import { ILanguage } from '../utilities/variables';
 import NovelView from '../wrapper/home/components/Novel';
 
@@ -158,6 +158,9 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
         </Link>
         <Link href={`/novel/${randomNovelId}`}>
           <a className={`header-link ${router.pathname === URL_SURPRISE ? 'active' : ''}`}>Surprise</a>
+        </Link>
+        <Link href={URL_REVIEW}>
+          <a className={`header-link ${router.pathname === URL_REVIEW ? 'active' : ''}`}>Review</a>
         </Link>
         <Link href={URL_ORIGINAL}>
           <a className={`header-link ${router.pathname === URL_ORIGINAL ? 'active' : ''}`}>Original</a>

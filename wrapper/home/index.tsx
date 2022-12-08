@@ -5,6 +5,7 @@ import BannerSection from './components/BannerSection';
 import NovelsSection from './components/NovelsSection';
 import { NovelStatus } from '../../utilities/Enum';
 import novelService from '../../services/novel.service';
+import reviewService, {Review} from '../../services/review.services';
 import Loading from '../../layout/Loading';
 
 interface IPropsHomeWrapper {
@@ -19,6 +20,7 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
   const [drama, setDrama] = useState<Novel[]>();
   const [fantasy, setFantasy] = useState<Novel[]>();
   const [comedy, setComedy] = useState<Novel[]>();
+  const [review, setReview] = useState<Review[]>();
   const [loading, setLoading] = useState(true);
   const scrollRef = useRef();
   const router = useRouter();
@@ -75,7 +77,7 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
   const getData = async () => {
     try {
       setLoading(true);
-      await Promise.all([getLastest(), getComplete(), getPopular()]);
+      await Promise.all([getLastest(), getComplete(), getPopular(), getReview()]);
       setLoading(false);
     } catch (e) {
       console.log(e);
@@ -91,6 +93,15 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
     setPopular(popular[0]);
   };
 
+  const getReview = async () => {
+    const review = await reviewService.getAllReview({
+      orderByView: true,
+      limit: 5,
+      skip: 0
+    });
+    setReview(review[0]);
+  };
+
   return (
     <>
       <BannerSection novels={popular} />
@@ -102,6 +113,7 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
       <NovelsSection novels={fantasy} title="Fantasy" />
       <NovelsSection novels={drama} title="Drama" isGray={true} />
       <NovelsSection novels={action} title="Action" />
+      <NovelsSection review={review} title="Review" />
       <Loading show={isLoading} />
     </>
   );
