@@ -6,9 +6,11 @@ import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { Novel } from '../services/novel.service';
-import { URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
+import {URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_REVIEW, URL_ROOT, URL_SURPRISE} from '../utilities/URL';
 import { ILanguage } from '../utilities/variables';
 import NovelView from '../wrapper/home/components/Novel';
+import novelServices from '../services/novel.service'
+import ShowImage from "./ShowImage";
 
 const { Text, Title } = Typography;
 const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
@@ -46,22 +48,18 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
     router.push(`/search?search=${value}`);
   };
 
-  const handleChangeSearch = e => {
-    console.log('e.target.value :>> ', e.target.value);
-    setIsFocus(true);
-    setNovelSearch([
-      {
-        id: 1,
-        image: '/img/banner_test.jpg',
-        name: 'Super Detective In The Fictional World',
-        description: 'Super Detective In The Fictional World',
-        rate: 4.0,
-        vote: 4,
-        views: 2610,
-        kind: 'Novel',
-        createdAt: new Date()
-      }
-    ]);
+  const handleChangeSearch = async e => {
+    try {
+      console.log('e.target.value :>> ', e.target.value);
+      setIsFocus(true);
+      const res = await novelServices.getAllNovel({
+        name: e.target.value,
+        limit: 10
+      })
+      setNovelSearch(res[0]);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleBlur = e => {
@@ -159,6 +157,9 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
         <Link href={`/novel/${randomNovelId}`}>
           <a className={`header-link ${router.pathname === URL_SURPRISE ? 'active' : ''}`}>Surprise</a>
         </Link>
+        <Link href={URL_REVIEW}>
+          <a className={`header-link ${router.pathname === URL_REVIEW ? 'active' : ''}`}>Review</a>
+        </Link>
         <Link href={URL_ORIGINAL}>
           <a className={`header-link ${router.pathname === URL_ORIGINAL ? 'active' : ''}`}>Original</a>
         </Link>
@@ -181,9 +182,9 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
               <div className="item-search">
                 {/* <NovelView novel={novelsSearch[0]} /> */}
                 {novelsSearch.map(novel => (
-                  <div className="novel-search">
+                  <div onClick={() => router.push(`/novel/${novel.uniqueName}`)} className="novel-search">
                     <div className="left">
-                      <img src={novel?.image} alt="image" />
+                      <ShowImage image={novel?.image}  container="images"/>
                     </div>
                     <div className="right">
                       <Title level={5} ellipsis={true} className="novel-title">

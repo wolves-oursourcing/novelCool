@@ -143,3 +143,10 @@
         }
     }
 }
+@media screen and (max-width: 576px) {
+    .reading-page {
+        .aside-actions {
+            display: none;
+        }
+    }
+}

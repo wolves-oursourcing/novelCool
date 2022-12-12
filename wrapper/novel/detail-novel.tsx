@@ -9,8 +9,9 @@ import CommentView from './comments';
 import {useRouter} from "next/router";
 import ShowImage from "../../layout/ShowImage";
 import {getUserInfo, patchUser} from "../../services/user.service";
-import {Config, KeyConfigLocal} from "../../api/configs";
+import {Config, KeyConfigLocal, ORIGIN_URL} from "../../api/configs";
 import {getChapterNovel} from "../../services/comment.services";
+import {FacebookShareButton} from "react-share";
 
 interface IPropsDetailPageWrapper {
   novels?: Novel;
@@ -26,6 +27,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
   const [changeButton, setChangeButton] = useState(false);
   const [novel, setNovel] = useState<Novel>({} as Novel);
   const [comment, setComment] = useState([]);
+  const [url, setUrl] = useState<any>("");
   const languages: ILanguage[] = [
     {
       code: 'uk',
@@ -63,6 +65,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
 
   useEffect(() => {
     if (novels) {
+      setUrl(`${ORIGIN_URL}/novel/${novels.uniqueName}`);
       setNovel(novels)
       getComment();
       checkIsInLib();
@@ -151,9 +154,13 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
     <div className="novel-detail-page container">
       <div className="detail-page-head">
         <div className="list-button">
-          <Button type="primary" icon={<FacebookOutlined />} size={'large'} className="btn-common">
-            Facebook
-          </Button>
+          <div className='item-button'>
+            <FacebookShareButton url={url}>
+              <Button type="primary" icon={<FacebookOutlined />} size={'large'} className="btn-common">
+                Facebook
+              </Button>
+            </FacebookShareButton>
+          </div>
         </div>
         <div className="report right">
           <div className="report-item">

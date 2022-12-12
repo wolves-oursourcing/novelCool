@@ -1,0 +1,46 @@
+.review-detail {
+    padding: 20px 0;
+    .title {
+        text-align: center;
+    }
+    .subHead {
+        text-align: center;
+        color: var(--color-red1);
+    }
+    .content-reivew-detail {
+        .left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            float: left;
+            margin-right: 1rem;
+            margin-bottom: .5rem;
+            .novel-image {
+                height: 245px;
+                margin-bottom: .5rem;
+            }
+            .btn-buy {
+                width: 100%;
+                justify-content: center;
+                border-radius: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .review-detail {
+        padding: 20px;
+        .content-reivew-detail {
+            .left {
+                .novel-image {
+                    width: 125px;
+                    height: auto;
+                }
+                .btn-buy {
+                    width: auto;
+                }
+            }
+        }
+    }
+}
