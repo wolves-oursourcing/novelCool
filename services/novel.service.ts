@@ -91,4 +91,14 @@ const getChapterNovel = async (filter?: any) => {
     return response;
 };
 
+export const translateText = async (data?: any) => {
+    const response = await api.postService(
+        "novel/translate",
+        data,
+        true,
+        false
+    );
+    return response;
+};
+
 export default { getBlogs, getDetailBlog, createNovel, getWeeklyMostActive, getById, getNovelByRank, getAllNovel, getChapterNovel, updateNovel };

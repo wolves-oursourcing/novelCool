@@ -2,11 +2,11 @@ import { MinusSquareOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import { Button, Divider, Input, Typography } from 'antd';
 import { range } from 'lodash';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { Novel } from '../../services/novel.service';
+import {useEffect, useState} from 'react';
+import novelService, {Chapter, Novel} from '../../services/novel.service';
 import { Status } from '../../utilities/variables';
 import NovelView from '../home/components/Novel';
-
+import {getCategory} from "../../services/category.services";
 interface IPropsWrapperSearch {
   value: string;
   isLoading: boolean;
@@ -18,17 +18,11 @@ const SearchPageWrapper = (props: IPropsWrapperSearch) => {
   const { value, isLoading } = props;
   const [openSearch, setOpenSearch] = useState<boolean>(false);
   const [novels, setNovels] = useState<Novel[]>([]);
-  const [genres, setGenres] = useState<string[]>([
-    '4 Koma',
-    '4-Koma',
-    'Action',
-    'Adaptation',
-    'Adventure',
-    'Alchemy',
-    'Aliens',
-    'Animals',
-    'Anthology'
-  ]);
+  const [series, setSeries] = useState('');
+  const [genres, setGenres] = useState<any[]>([]);
+  const [selectedCate, setSelectedCate] = useState<any>();
+  const [startWith, setStartWith] = useState('');
+  const [selectedStatus, setSelectedStatus] = useState('');
   const years = range(1955, 2000);
   const status = Object.values(Status).map(item => {
     return {
@@ -65,13 +59,42 @@ const SearchPageWrapper = (props: IPropsWrapperSearch) => {
     'Z'
   ];
 
+  const getCateGory = async () => {
+    try {
+      const res = await getCategory();
+      setGenres(res[0]);
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+
   const toggleSearch = () => {
     setOpenSearch(!openSearch);
   };
 
-  const search = () => {
-    console.log('search :>> ');
+  const search = async () => {
+    try {
+      const res = await novelService.getAllNovel({
+        name: series,
+        categoryId: selectedCate ? selectedCate.id : undefined,
+        startWith: startWith,
+        status: selectedStatus === Status.ALL ? '' : selectedStatus
+      });
+      setNovels(res[0]);
+    } catch (e) {
+      console.log(e);
+    }
+
   };
+
+  useEffect(() => {
+    getCateGory();
+  }, []);
+
+  useEffect(() => {
+    search();
+  }, [selectedCate, selectedStatus])
 
   return (
     <>
@@ -91,20 +114,14 @@ const SearchPageWrapper = (props: IPropsWrapperSearch) => {
             <div className="row-search">
               <label className="label">Name:</label>
               <div className="list-search">
-                <Input placeholder="Series name" />
-              </div>
-            </div>
-            <div className="row-search">
-              <label className="label">Author name:</label>
-              <div className="list-search">
-                <Input placeholder="Author name" />
+                <Input onChange={(e) => setSeries(e.target.value)} placeholder="Series name" />
               </div>
             </div>
             <div className="row-search">
               <label className="label">Status:</label>
               <div className="list-search">
                 {status.map(st => (
-                  <div className={`${st.value === Status.ALL ? 'all' : ''} item-search`} key={st.key}>
+                  <div onClick={() => setSelectedStatus(st.value)} className={`${st.value === Status.ALL ? 'all' : ''} item-search`} key={st.key}>
                     {st.value}
                   </div>
                 ))}
@@ -115,19 +132,8 @@ const SearchPageWrapper = (props: IPropsWrapperSearch) => {
               <div className="list-search">
                 <div className="item-search all">All</div>
                 {genres.map(genre => (
-                  <div className="item-search" key={genre}>
-                    {genre}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="row-search">
-              <label className="label">Years:</label>
-              <div className="list-search year">
-                <div className="item-search all">All</div>
-                {years.map(year => (
-                  <div className="item-search" key={year}>
-                    {year}
+                  <div onClick={() => setSelectedCate(genre.id)} className="item-search" key={genre.id}>
+                    {genre.name}
                   </div>
                 ))}
               </div>
@@ -138,7 +144,7 @@ const SearchPageWrapper = (props: IPropsWrapperSearch) => {
                 <div className="item-search all">All</div>
                 <div className="item-search">0-9</div>
                 {alphabet.map(ch => (
-                  <div className="item-search" key={ch}>
+                  <div onClick={() => setStartWith(ch)} className="item-search" key={ch}>
                     {ch}
                   </div>
                 ))}

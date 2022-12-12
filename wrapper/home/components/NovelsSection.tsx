@@ -4,16 +4,19 @@ import { FC } from 'react';
 import { Novel } from '../../../services/novel.service';
 import NovelView from './Novel';
 import ReactLoading from "react-loading";
+import {Review} from "../../../services/review.services";
+import ReviewView from "./Review";
 
 interface IPropsNovelsSection {
   title: string;
   novels?: Novel[];
+  review?: Review[];
   isGray?: boolean;
   loading?: boolean
 }
 const { Title } = Typography;
 const NovelsSection: FC<IPropsNovelsSection> = (props: IPropsNovelsSection) => {
-  const { novels, title, isGray, loading } = props;
+  const { novels, title, isGray, loading, review } = props;
   return (
     <div className={`${isGray ? 'gray' : ''} novels-section`}>
       <div className="container">
@@ -37,6 +40,14 @@ const NovelsSection: FC<IPropsNovelsSection> = (props: IPropsNovelsSection) => {
               // <div className="novel">1</div>
             ))}
           </div>
+        )}
+        {review && review.length > 0 && (
+            <div className="list-novel">
+              {review.map(novel => (
+                  <ReviewView review={novel} />
+                  // <div className="novel">1</div>
+              ))}
+            </div>
         )}
       </div>
     </div>

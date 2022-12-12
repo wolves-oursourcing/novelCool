@@ -21,6 +21,7 @@
 @import './auth/auth.scss';
 @import './account/account.scss';
 @import './search/search.scss';
+@import './review/review.scss';
 
 
 html,
@@ -186,6 +187,11 @@ input, button {
     }
     .novel-brief {
       font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
     }
   }
   .novel-rate {
