@@ -7,7 +7,7 @@ import { FC } from 'react';
 import { Novel } from '../../../services/novel.service';
 import { NovelKind } from '../../../utilities/variables';
 import ShowImage from '../../../layout/ShowImage';
-import {Review} from "../../../services/review.services";
+import { Review } from '../../../services/review.services';
 
 export enum DisplayType {
   NORMAL = 'NORMAL',
@@ -23,12 +23,15 @@ const ReviewView: FC<IPropsReview> = (props: IPropsReview) => {
   const router = useRouter();
 
   const gotoDetail = (id?: string) => {
-    console.log(id);
     router.push(`/novel/${id}`);
   };
+
+  const goToReviewDetail = (id: number) => {
+    router.push(`/review/${id}`);
+  };
   return (
-    <div className="novel">
-      <div className="novel-image" >
+    <div className="novel" onClick={() => goToReviewDetail(review.id)}>
+      <div className="novel-image">
         <ShowImage image={review?.image} container="images" />
         <div className="overlay">
           <Title level={5} className="novel-title">

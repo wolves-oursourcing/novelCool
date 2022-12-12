@@ -2,11 +2,9 @@ import { MinusSquareOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import { Divider, Typography } from 'antd';
 import { range } from 'lodash';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { Novel } from '../../services/novel.service';
 import { Status } from '../../utilities/variables';
-import NovelView from '../home/components/Novel';
-import ReviewView from "../home/components/Review";
+import ReviewView from '../home/components/Review';
 
 interface IPropsWrapperReview {
   reviews?: Novel[];
@@ -34,8 +32,7 @@ const ReviewPageWrapper = (props: IPropsWrapperReview) => {
             </Title>
           </div>
           <Divider className="novels-section-divider" />
-          <div className={` novels-section-search`}>
-          </div>
+          <div className={` novels-section-search`}></div>
           {reviews && reviews.length > 0 && (
             <div className="list-novel">
               {reviews.map((review, index) => (
