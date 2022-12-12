@@ -14,4 +14,11 @@ const getAllReview = async (filter?: any) => {
     return response;
 };
 
-export default { getAllReview };
+const getReviewById = async (id?: any) => {
+    const response = await api.getService<any[]>(
+        `review/${id}`
+    );
+    return response;
+};
+
+export default { getAllReview, getReviewById };
