@@ -32,3 +32,16 @@
         }
     }
 }
+.item-button {
+    .hover {
+        display: none;
+    }
+    &:hover {
+        .hover {
+            display: block;
+        }
+        .normal {
+            display: none;
+        }
+    }
+}

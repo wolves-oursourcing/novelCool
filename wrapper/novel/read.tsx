@@ -5,7 +5,7 @@ import Footer from '../../layout/Footer';
 import { ILanguage } from '../../utilities/variables';
 import AsideActions from './components/AsideActions';
 import {Config} from "../../api/configs";
-import novelService, {Chapter, Novel} from "../../services/novel.service";
+import novelService, {Chapter, Novel, translateText} from "../../services/novel.service";
 import Router from "next/router";
 import ReactLoading from 'react-loading';
 import {Simulate} from "react-dom/test-utils";
@@ -18,7 +18,7 @@ interface IPropsReadingPage {
 const { Title, Text, Paragraph } = Typography;
 const languages: ILanguage[] = [
   {
-    code: 'uk',
+    code: 'en',
     name: 'England',
     flag: '/flags/england.png'
   },
@@ -33,15 +33,39 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
   const [languageSelected, setLanguageSelected] = useState<ILanguage>(languages[0]);
   const { chapter, novel } = props;
   const [data, setData] = useState<any>("");
+  const [dataRoot, setDataRoot] = useState<any>("");
   const [allChapter, setAllChapter] = useState<any>([]);
   const [isFirst, setIsFirst] = useState(false);
   const [isLast, setIsLast] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setLanguageSelected(languages[0]);
+    const currentLanguage = localStorage.getItem("language");
+    if (!currentLanguage) {
+      setLanguageSelected(languages[0]);
+      localStorage.setItem("language", JSON.stringify(languages[0]));
+    } else {
+      setLanguageSelected(JSON.parse(currentLanguage))
+    }
     getAllChapter();
     updateView();
   }, [chapter]);
+
+  useEffect(() => {
+    localStorage.setItem("language", JSON.stringify(languageSelected));
+    translateData();
+  }, [languageSelected]);
+
+
+  const translateData = async (story?: string) => {
+    try{
+      const target = languageSelected.code;
+      const translate: any = await translateText({data: story ? story : dataRoot, target: target})
+      setData(translate.data);
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
 
   const getAllChapter = async () => {
     try {
@@ -105,7 +129,8 @@ const ReadingWrapper = (props: IPropsReadingPage) => {
         `${Config.URL_API}files/download/chapterFiles?file=${chapter.content}`
     );
     const story = await res.text();
-    setData(story);
+    setDataRoot(story);
+    translateData(story);
   };
   // RENDER
   const menu = () => {

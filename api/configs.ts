@@ -1,12 +1,13 @@
 export const Config = {
+  // URL_API: 'https://api.anime.wildwolves.shop/',
   URL_API: 'https://api.anime.wildwolves.shop/',
-  // URL_API: 'http://157.245.152.118:3001/',
   // URL_API: 'http://localhost:3002/',
   TOKEN: 'token',
   USER: 'user',
-  FACEBOOK_APP_ID: '658430965696356',
-  GOOGLE_CLIENT_ID: '498077768323-gb1slr9b4k64o8vse1ds3p0q4979439s.apps.googleusercontent.com',
-  CLIENT_SECRET: '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'
+  FACEBOOK_APP_ID: "658430965696356",
+  GOOGLE_CLIENT_ID:
+      "498077768323-gb1slr9b4k64o8vse1ds3p0q4979439s.apps.googleusercontent.com",
+  CLIENT_SECRET: "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",
 };
 
 export const RESPONSE_STATUS = {
@@ -35,3 +36,4 @@ export interface IResponse {
 }
 
 export const PER_PAGE = 6;
+export const ORIGIN_URL = 'https://latestnovels.net/';
