@@ -187,10 +187,12 @@ input, button {
     }
     .novel-brief {
       font-size: 12px;
+      margin-bottom: .5rem;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 5;
+      -webkit-line-clamp: 7; /* number of lines to show */
+      line-clamp: 7;
       -webkit-box-orient: vertical;
     }
   }
@@ -223,7 +225,7 @@ input, button {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
   }
   .novel-divider {
     margin-top: 1rem;
@@ -410,7 +412,7 @@ input, button {
     display: flex;
     align-items: center;
   }
-  
+
 }
 
 .novel-suggest {
