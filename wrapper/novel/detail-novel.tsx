@@ -237,7 +237,7 @@ const DetailPageWrapper = (props: IPropsDetailPageWrapper) => {
             <li>{novel.status}</li>
             {
               novel.categories?.map(cate => (
-                <li>cate.name</li>
+                <li>{cate.name}</li>
               ))
             }
 
