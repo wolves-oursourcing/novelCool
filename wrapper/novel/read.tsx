@@ -26,6 +26,31 @@ const languages: ILanguage[] = [
     code: 'fr',
     name: 'France',
     flag: '/flags/france.svg'
+  },
+  {
+    code: 'zh',
+    name: 'China',
+    flag: '/flags/china.svg'
+  },
+  {
+    code: 'ja',
+    name: 'Japan',
+    flag: '/flags/japan.svg'
+  },
+  {
+    code: 'ko',
+    name: 'South Korea',
+    flag: '/flags/korean.svg'
+  },
+  {
+    code: 'es',
+    name: 'Spain',
+    flag: '/flags/spain.svg'
+  },
+  {
+    code: 'pt',
+    name: 'Portugal',
+    flag: '/flags/portugal.svg'
   }
 ];
 
