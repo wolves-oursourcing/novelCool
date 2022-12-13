@@ -36,4 +36,4 @@ export interface IResponse {
 }
 
 export const PER_PAGE = 6;
-export const ORIGIN_URL = 'https://www.readfullnovels.net';
+export const ORIGIN_URL = 'https://allfreenovels.net';
