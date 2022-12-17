@@ -115,11 +115,11 @@ const SideBar: FC<{}> = () => {
               Surprise
             </a>
           </p>
-          <p className="mb-30">
-            <a href={URL_ORIGINAL} className="header-link">
-              Original
-            </a>
-          </p>
+          {/*<p className="mb-30">*/}
+          {/*  <a href={URL_ORIGINAL} className="header-link">*/}
+          {/*    Original*/}
+          {/*  </a>*/}
+          {/*</p>*/}
           <p className="mb-30">
             <a href={URL_APP} className="header-link">
               App
