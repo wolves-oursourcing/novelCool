@@ -47,7 +47,7 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   ];
 
   const [languageSelected, setLanguageSelected] = useState<ILanguage>(languages[0]);
-  const [randomNovelId, setRandomNovelId] = useState();
+  const [randomNovelId, setRandomNovelId] = useState(1);
   const [user, setUser] = useState<any>();
   const [novelsSearch, setNovelSearch] = useState<Novel[]>([]);
   const [isFocus, setIsFocus] = useState(false);
