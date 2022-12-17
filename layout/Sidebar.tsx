@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { FC, useRef, useState } from 'react';
 import { Novel } from '../services/novel.service';
-import { URL_APP, URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
+import { URL_APP, URL_CATEGORY, URL_NEW, URL_POPULAR, URL_ROOT, URL_SURPRISE } from '../utilities/URL';
 
 const SideBar: FC<{}> = () => {
   const [showSidebar, setShowSidebar] = useState(false);
