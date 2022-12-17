@@ -6,18 +6,20 @@ import { useState } from 'react';
 import { Novel } from '../../services/novel.service';
 import { Status } from '../../utilities/variables';
 import NovelView from '../home/components/Novel';
+import PaginationView from "../../layout/Pagination";
 
 interface IPropsWrapperCategory {
   novels?: Novel[];
   total?: number;
   currentPage?: number;
   isLoading: boolean;
+  onChangePage?: any;
 }
 const { Title } = Typography;
 
 const CategoryPageWrapper = (props: IPropsWrapperCategory) => {
   const router = useRouter();
-  const { novels, total, currentPage, isLoading } = props;
+  const { novels, total, currentPage, isLoading, onChangePage } = props;
   const [openSearch, setOpenSearch] = useState<boolean>(false);
   const [genres, setGenres] = useState<string[]>([
     '4 Koma',
@@ -139,6 +141,7 @@ const CategoryPageWrapper = (props: IPropsWrapperCategory) => {
             </div>
           )}
         </div>
+        <PaginationView current={currentPage} total={total} onChange={onChangePage} pageSize={20} />
       </div>
     </>
   );

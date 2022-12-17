@@ -105,15 +105,15 @@ const HomeWrapper = (props: IPropsHomeWrapper) => {
   return (
     <>
       <BannerSection novels={popular} />
-      <NovelsSection novels={lastest} title="Latest" isGray={true} />
-      <NovelsSection novels={popular} title="Popular" />
-      <NovelsSection novels={complete} title="Completed" isGray={true} />
-      <NovelsSection novels={lastest} title="Romance" />
-      <NovelsSection novels={comedy} title="Comedy" isGray={true} />
-      <NovelsSection novels={fantasy} title="Fantasy" />
-      <NovelsSection novels={drama} title="Drama" isGray={true} />
-      <NovelsSection novels={action} title="Action" />
-      <NovelsSection review={review} title="Review" />
+      <NovelsSection novels={lastest} title="Latest" routerTo="/lastest" isGray={true} />
+      <NovelsSection novels={popular} title="Popular" routerTo="/category" />
+      <NovelsSection novels={complete} title="Completed" isGray={true} routerTo="/category" />
+      <NovelsSection novels={lastest} title="Romance" routerTo="/category" />
+      <NovelsSection novels={comedy} title="Comedy" isGray={true} routerTo="/category" />
+      <NovelsSection novels={fantasy} title="Fantasy" routerTo="/category" />
+      <NovelsSection novels={drama} title="Drama" isGray={true} routerTo="/category" />
+      <NovelsSection novels={action} title="Action" routerTo="/category" />
+      <NovelsSection review={review} title="Review" routerTo="/category" />
       <Loading show={isLoading} />
     </>
   );
