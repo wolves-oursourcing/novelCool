@@ -94,7 +94,7 @@ const NovelView: FC<IPropsNovel> = (props: IPropsNovel) => {
           {displayType === DisplayType.FOLLOW ? (
             <>
               <div className="footer-top">
-                <Text ellipsis>Chapter 1691 dsfas fdsafdsaf dfas</Text>
+                <Text ellipsis>{`Chapter ${novel?.chapters && novel?.chapters.length > 0 ? novel?.chapters[novel.chapters.length - 1].episode : 0}`}</Text>
                 <div className="novel-timer">{moment(novel.createdAt).format('MMM DD, YYYY')}</div>
               </div>
               <div className="novel-follow">

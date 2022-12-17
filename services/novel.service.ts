@@ -5,6 +5,7 @@ export type NovelFilter = any;
 
 export interface Chapter {
   id: number;
+    episode?: number;
   name?: string;
   uniqueName: string;
   view?: number;
@@ -91,6 +92,14 @@ const getChapterNovel = async (filter?: any) => {
     return response;
 };
 
+const getRandomNovel = async (filter?: any) => {
+    const response = await api.getService<any>(
+        "novel/getRandomNovel",
+        filter
+    );
+    return response;
+};
+
 export const translateText = async (data?: any) => {
     const response = await api.postService(
         "novel/translate",
@@ -101,4 +110,4 @@ export const translateText = async (data?: any) => {
     return response;
 };
 
-export default { getBlogs, getDetailBlog, createNovel, getWeeklyMostActive, getById, getNovelByRank, getAllNovel, getChapterNovel, updateNovel };
+export default { getBlogs, getDetailBlog, createNovel, getWeeklyMostActive, getById, getNovelByRank, getAllNovel, getChapterNovel, updateNovel, getRandomNovel };

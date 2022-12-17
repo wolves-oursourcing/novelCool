@@ -1,32 +1,29 @@
 import { PaginationProps } from 'antd';
 import { useEffect, useState } from 'react';
 import withAppProvider from '../../hoc/withAppProvider';
-import novelServices, { Novel } from '../../services/novel.service';
-import PopularPageWrapper from '../../wrapper/popular';
+import { Novel } from '../../services/novel.service';
+import NewPageWrapper from '../../wrapper/new';
+import novelServices from '../../services/novel.service'
+import LastestPageWrapper from "../../wrapper/lastest";
 
-const PopularPage = () => {
+const LastestPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [novels, setNovels] = useState<Novel[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(50);
   const limit = 20;
   useEffect(() => {
+    setNovels([]);
+  }, []);
+  useEffect(() => {
     getNewNovel();
   }, []);
-  useEffect(() => {}, []);
-
-  const onChangePage: PaginationProps['onChange'] = page => {
-    console.log(page);
-    setCurrentPage(page);
-    getNewNovel(page)
-  };
 
   const getNewNovel = async (page?) => {
     try {
       const filter = {
         limit: limit,
-        skip: (page? page : currentPage) * limit,
-        orderByView: true
+        skip: (page ? page : currentPage) * limit
       }
       const res = await novelServices.getAllNovel(filter);
       setNovels(res[0]);
@@ -35,9 +32,15 @@ const PopularPage = () => {
       console.log(e);
     }
   }
+
+  const onChangePage: PaginationProps['onChange'] = page => {
+    console.log(page);
+    setCurrentPage(page);
+    getNewNovel(page)
+  };
   return (
     <div>
-      <PopularPageWrapper
+      <LastestPageWrapper
         isLoading={isLoading}
         novels={novels}
         currentPage={currentPage}
@@ -48,4 +51,4 @@ const PopularPage = () => {
   );
 };
 
-export default withAppProvider(PopularPage);
+export default withAppProvider(LastestPage);
