@@ -177,15 +177,15 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
         <Link href={URL_POPULAR}>
           <a className={`header-link ${router.pathname === URL_POPULAR ? 'active' : ''}`}>Popular</a>
         </Link>
-        {/*<Link href={`/novel/${randomNovelId}`}>*/}
-        {/*  <a className={`header-link ${router.pathname === URL_SURPRISE ? 'active' : ''}`}>Surprise</a>*/}
-        {/*</Link>*/}
+        <Link href={`/novel/${randomNovelId}`}>
+          <a className={`header-link ${router.pathname === URL_SURPRISE ? 'active' : ''}`}>Surprise</a>
+        </Link>
         <Link href={URL_REVIEW}>
           <a className={`header-link ${router.pathname === URL_REVIEW ? 'active' : ''}`}>Review</a>
         </Link>
-        <Link href={URL_ORIGINAL}>
-          <a className={`header-link ${router.pathname === URL_ORIGINAL ? 'active' : ''}`}>Original</a>
-        </Link>
+        {/*<Link href={URL_ORIGINAL}>*/}
+        {/*  <a className={`header-link ${router.pathname === URL_ORIGINAL ? 'active' : ''}`}>Original</a>*/}
+        {/*</Link>*/}
       </div>
       <div className="list-menu-right">
         <Button className="btn-upload menu-right-item" onClick={() => router.push('/')}>
