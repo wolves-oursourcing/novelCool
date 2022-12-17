@@ -6,6 +6,7 @@ import NovelView from './Novel';
 import ReactLoading from "react-loading";
 import {Review} from "../../../services/review.services";
 import ReviewView from "./Review";
+import Link from "next/link";
 
 interface IPropsNovelsSection {
   title: string;
@@ -13,10 +14,11 @@ interface IPropsNovelsSection {
   review?: Review[];
   isGray?: boolean;
   loading?: boolean
+  routerTo?: string;
 }
 const { Title } = Typography;
 const NovelsSection: FC<IPropsNovelsSection> = (props: IPropsNovelsSection) => {
-  const { novels, title, isGray, loading, review } = props;
+  const { novels, title, isGray, loading, review, routerTo } = props;
   return (
     <div className={`${isGray ? 'gray' : ''} novels-section`}>
       <div className="container">
@@ -27,10 +29,12 @@ const NovelsSection: FC<IPropsNovelsSection> = (props: IPropsNovelsSection) => {
           <Title level={3} className="novels-section-title">
             {title}
           </Title>
-          <div className="more">
-            <p>More</p>
-            <RightOutlined />
-          </div>
+          <Link href={routerTo}>
+            <div className="more">
+              <p>More</p>
+              <RightOutlined />
+            </div>
+          </Link>
         </div>
         <Divider className="novels-section-divider" />
         {novels && novels.length > 0 && (

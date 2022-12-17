@@ -3,7 +3,7 @@ import PaginationView from '../../layout/Pagination';
 import { Novel } from '../../services/novel.service';
 import NovelView, { DisplayType } from '../home/components/Novel';
 
-interface IPropsPopularPageWrapper {
+interface IPropsLastestPageWrapper {
   novels: Novel[];
   isLoading: boolean;
   currentPage?: number;
@@ -12,14 +12,14 @@ interface IPropsPopularPageWrapper {
 }
 const { Title } = Typography;
 
-const PopularPageWrapper = (props: IPropsPopularPageWrapper) => {
+const LastestPageWrapper = (props: IPropsLastestPageWrapper) => {
   const { novels, currentPage, onChangePage, total } = props;
   return (
     <div className="new-page container">
       <div className="novels-section">
         <div className="novels-section-head">
           <Title level={3} className="novels-section-title">
-            Popular
+            Lastest
           </Title>
         </div>
         <Divider className="novels-section-divider" />
@@ -36,7 +36,7 @@ const PopularPageWrapper = (props: IPropsPopularPageWrapper) => {
                 />
               ))}
             </div>
-            <PaginationView current={currentPage} total={total} onChange={onChangePage} pageSize={10} />
+            <PaginationView current={currentPage} total={total} onChange={onChangePage} pageSize={20} />
           </div>
         )}
       </div>
@@ -44,4 +44,4 @@ const PopularPageWrapper = (props: IPropsPopularPageWrapper) => {
   );
 };
 
-export default PopularPageWrapper;
+export default LastestPageWrapper;
