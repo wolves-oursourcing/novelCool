@@ -507,6 +507,7 @@ input, button {
   color: var(--color-primary);
   display: flex;
   align-items: center;
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }

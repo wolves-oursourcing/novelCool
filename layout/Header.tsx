@@ -6,11 +6,19 @@ import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { Novel } from '../services/novel.service';
-import {URL_CATEGORY, URL_NEW, URL_ORIGINAL, URL_POPULAR, URL_REVIEW, URL_ROOT, URL_SURPRISE} from '../utilities/URL';
+import {
+  URL_CATEGORY,
+  URL_LASTEST,
+  URL_NEW,
+  URL_ORIGINAL,
+  URL_POPULAR,
+  URL_REVIEW,
+  URL_ROOT,
+  URL_SURPRISE
+} from '../utilities/URL';
 import { ILanguage } from '../utilities/variables';
-import NovelView from '../wrapper/home/components/Novel';
-import novelServices from '../services/novel.service'
 import ShowImage from "./ShowImage";
+import novelServices from '../services/novel.service';
 
 const { Text, Title } = Typography;
 const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
@@ -39,7 +47,7 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
   ];
 
   const [languageSelected, setLanguageSelected] = useState<ILanguage>(languages[0]);
-  const [randomNovelId, setRandomNovelId] = useState(1);
+  const [randomNovelId, setRandomNovelId] = useState();
   const [user, setUser] = useState<any>();
   const [novelsSearch, setNovelSearch] = useState<Novel[]>([]);
   const [isFocus, setIsFocus] = useState(false);
@@ -47,6 +55,21 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
     console.log(value);
     router.push(`/search?search=${value}`);
   };
+
+  useEffect(() => {
+    getNovel();
+  }, []);
+
+  const getNovel = async () => {
+    try {
+      const res = await novelServices.getRandomNovel();
+      if (res) {
+        setRandomNovelId(res.uniqueName)
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   const handleChangeSearch = async e => {
     try {
@@ -142,8 +165,8 @@ const Header: FC<{ isScroll: boolean }> = ({ isScroll }) => {
         <Image src="/img/logo.svg" alt="logo" width={86} height={50} />
       </a>
       <div className="list-menu">
-        <Link href={URL_ROOT}>
-          <a className={`header-link ${router.pathname === URL_ROOT ? 'active' : ''}`}>Latest</a>
+        <Link href={URL_LASTEST}>
+          <a className={`header-link ${router.pathname === URL_LASTEST ? 'active' : ''}`}>Latest</a>
         </Link>
         <Link href={URL_CATEGORY}>
           <a className={`header-link ${router.pathname === URL_CATEGORY ? 'active' : ''}`}>Category</a>

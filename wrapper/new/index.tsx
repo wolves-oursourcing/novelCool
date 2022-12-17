@@ -36,7 +36,7 @@ const NewPageWrapper = (props: IPropsNewPageWrapper) => {
                 />
               ))}
             </div>
-            <PaginationView current={currentPage} total={total} onChange={onChangePage} pageSize={10} />
+            <PaginationView current={currentPage} total={total} onChange={onChangePage} pageSize={20} />
           </div>
         )}
       </div>
