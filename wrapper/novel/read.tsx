@@ -51,6 +51,16 @@ const languages: ILanguage[] = [
     code: 'pt',
     name: 'Portugal',
     flag: '/flags/portugal.svg'
+  },
+  {
+    code: 'id',
+    name: 'Indonesian',
+    flag: '/flags/indonesia.svg'
+  },
+  {
+    code: 'th',
+    name: 'Thailand',
+    flag: '/flags/thailand.svg'
   }
 ];
 
