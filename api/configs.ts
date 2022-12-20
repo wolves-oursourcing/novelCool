@@ -37,3 +37,4 @@ export interface IResponse {
 
 export const PER_PAGE = 6;
 export const ORIGIN_URL = 'https://latestnovels.net/';
+export const analyticsId = 'G-M6DFH499J9';
