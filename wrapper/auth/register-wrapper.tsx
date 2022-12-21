@@ -2,6 +2,8 @@ import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { signUp } from '../../services/user.service';
 import Router from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const { Title, Text } = Typography;
 const RegisterWrapper = () => {
   const onFinish = async (value: any) => {
@@ -16,6 +18,7 @@ const RegisterWrapper = () => {
       Router.push('/auth/login');
     } catch (e) {
       console.log(e);
+      toast(e.message)
     }
   };
 
@@ -46,7 +49,7 @@ const RegisterWrapper = () => {
             <Input.Password
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              placeholder="Password confirm"
+              placeholder="Password"
             />
           </Form.Item>
           <Form.Item
@@ -68,7 +71,7 @@ const RegisterWrapper = () => {
               })
             ]}
           >
-            <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
+            <Input.Password prefix={<LockOutlined className="site-form-item-icon" />}  placeholder="Password confirm" />
           </Form.Item>
           <Form.Item name="username" rules={[{ required: false }]}>
             <Input
@@ -90,6 +93,7 @@ const RegisterWrapper = () => {
           </Form.Item>
         </Form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
