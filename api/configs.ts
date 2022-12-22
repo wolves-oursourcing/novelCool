@@ -37,4 +37,4 @@ export interface IResponse {
 
 export const PER_PAGE = 6;
 export const ORIGIN_URL = 'https://allfreenovels.net';
-export const analyticsId = 'G-XHST926MSK';
+export const analyticsId = 'G-S38PZF80KH';
