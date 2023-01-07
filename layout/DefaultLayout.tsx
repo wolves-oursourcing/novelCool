@@ -5,7 +5,6 @@ const DefaultLayout: FC<{ children?: any }> = ({ children }) => {
   return (
     <>
       <Head>
-        <meta name="robots" content="noindex, nofollow" />
           {/*<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />*/}
         <title>Latest Novels</title>
         <meta name="description" content="For reading novel" />
