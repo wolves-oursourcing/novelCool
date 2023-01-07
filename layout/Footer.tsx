@@ -2,6 +2,7 @@ import { CopyrightCircleOutlined } from '@ant-design/icons';
 import { BackTop, Col, Row } from 'antd';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import {ORIGIN_URL} from "../api/configs";
 const Footer: FC = () => {
   return (
     <>
@@ -33,7 +34,7 @@ const Footer: FC = () => {
           <Col xs={24} md={12} className="d-flex justify-content-center align-items-end">
             <div className="copyright">
               <CopyrightCircleOutlined />
-              2018 NovelCool.com
+              2018 {ORIGIN_URL}
             </div>
           </Col>
         </Row>
